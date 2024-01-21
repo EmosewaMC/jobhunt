@@ -20,10 +20,11 @@ jobs:
         run: |
           deno --version
           deno install --unstable --allow-read --allow-write --allow-net --allow-env --allow-run --name=pagic https://deno.land/x/pagic@v1.6.3/mod.ts
+          cd ./server
           pagic build
 
       - name: Deploy gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./server/dist
