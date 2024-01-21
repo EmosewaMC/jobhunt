@@ -1,5 +1,5 @@
 export default {
-  srcDir: ".",
+  srcDir: "./server",
   outDir: "dist",
   exclude: ["examples"],
 };
