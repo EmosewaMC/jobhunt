@@ -1,3 +1,7 @@
 Deno.serve((_req: Request) => {
-  return new Response("Hello, world!");
+  console.log("Request received");
+  console.log(_req);
+  return new Response("Hello, world!", {
+    status: 404,
+  });
 });
