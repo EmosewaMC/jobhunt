@@ -1,10 +1,11 @@
 const conn = await Deno.connect({ port: 8000 });
 const request = new TextEncoder().encode("GET / HTTP/1.0\r\n\r\n");
 await conn.write(request);
-const responseBuf = new Uint8Array(200);
+const responseBuf = new Uint8Array(2000);
 const read = await conn.read(responseBuf);
 console.log(read);
 const response = await new Response(responseBuf);
+console.log("Response received");
 console.log(await response);
 console.log(await response.text());
 conn.close();
