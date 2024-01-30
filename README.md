@@ -10,7 +10,8 @@ if you are on `git 2.0+`, you may need to do <br>
 `npm i` <br>
 `npm run dev` <br>
 
-
+## Instructions
+Press the arrow keys to move around.
 
 
 # Dependencies
