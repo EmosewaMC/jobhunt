@@ -1,4 +1,4 @@
-import { DB } from "https://deno.land/x/sqlite/mod.ts";
+import { Database } from "https://deno.land/x/sqlite3@0.10.0/mod.ts";
 import * as Msg from "../shared/shared.ts";
 
 let myX = 10;
@@ -39,8 +39,8 @@ Deno.serve((_req: Request) => {
     : new Response(JSON.stringify("Unknown Message"), { status: 404 });
 });
 
-const db = new DB("test.sqlite");
-db.execute(`
+const db = new Database("test.sqlite");
+db.run(`
 CREATE TABLE IF NOT EXISTS people (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT,
