@@ -19,6 +19,9 @@ export default function Home() {
           <code class="mx-2">./routes/index.tsx</code> file, and refresh.
         </p>
         <Counter count={count} />
+        <a href="/worldMap" class="text-blue-500 underline">
+          Go to the other page
+        </a>
       </div>
     </div>
   );
