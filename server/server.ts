@@ -16,10 +16,7 @@ Deno.serve((_req: Request) => {
     const content = JSON.parse(url.searchParams.get("content") || "{}");
     console.log(content);
     if (url.searchParams.get("message") === "GetPosition") {
-      const position = new Msg.GetPosition(10, 20);
-      position.deserialize(content);
-      position.x = myX;
-      position.y = myY;
+      const position = new Msg.GetPosition(myX, myY);
       const stream = JSON.parse("{}");
       position.serialize(stream);
       response = new Response(JSON.stringify(stream), {

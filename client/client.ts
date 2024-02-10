@@ -3,7 +3,7 @@ import * as Msg from "../shared/shared.ts";
 
 function handleMessage(message: any) {
   if (message["message"] !== undefined) {
-    console.log("Received message:", message["message"]);
+    console.log("Received reponse for:", message["message"]);
     if (message["message"] === "GetPosition") {
       const msgGetPosition = new Msg.GetPosition();
       msgGetPosition.deserialize(message);
@@ -35,7 +35,9 @@ async function sendMessage(message: Msg.Message) {
   handleMessage(JSON.parse(await response.text()));
 }
 
+console.log("Sending Position...");
 await sendMessage(
   new Msg.SetPosition(Math.random() * 100, Math.random() * 1000),
 );
+console.log("Getting Position...");
 await sendMessage(new Msg.GetPosition());
