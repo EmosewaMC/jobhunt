@@ -1,5 +1,5 @@
 import { useSignal } from "@preact/signals";
-import Counter from "../islands/Counter.tsx";
+import Map from "../islands/MapIsland.tsx";
 
 export default function Home() {
     //need to make the world map interactable
@@ -9,7 +9,7 @@ export default function Home() {
     <div class="px-4 py-8 mx-auto bg-[#86efac]">
       <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
         <h1 class="text-4xl font-bold">World Map</h1>
-        <img src="/stardew.jpg" alt="world map" />
+        <Map />
       </div>
     </div>
   );

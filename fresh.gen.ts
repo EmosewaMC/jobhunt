@@ -13,6 +13,7 @@ import * as $network from "./routes/network.tsx";
 import * as $resume from "./routes/resume.tsx";
 import * as $worldMap from "./routes/worldMap.tsx";
 import * as $Counter from "./islands/Counter.tsx";
+import * as $MapIsland from "./islands/MapIsland.tsx";
 import * as $Nav from "./islands/Nav.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
@@ -31,6 +32,7 @@ const manifest = {
   },
   islands: {
     "./islands/Counter.tsx": $Counter,
+    "./islands/MapIsland.tsx": $MapIsland,
     "./islands/Nav.tsx": $Nav,
   },
   baseUrl: import.meta.url,
