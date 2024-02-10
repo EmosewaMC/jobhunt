@@ -1,2 +1,16 @@
 .vscode/*
 server/test.sqlite
+hifi-gameplay-1/.vscode/*
+
+# dotenv environment variable files
+hifi-gameplay-1/.env
+hifi-gameplay-1/.env.development.local
+hifi-gameplay-1/.env.test.local
+hifi-gameplay-1/.env.production.local
+hifi-gameplay-1/.env.local
+
+# Fresh build directory
+hifi-gameplay-1/_fresh/
+# npm dependencies
+hifi-gameplay-1/node_modules/
+
