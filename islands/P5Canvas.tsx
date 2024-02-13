@@ -15,6 +15,8 @@ export default function P5Canvas() {
       new p5((p: any) => {
         let bgImg: any;
         let playerImg: any;
+        let animate = false;
+        let activeSeconds = 0;
         p.preload = function () {
             bgImg = p.loadImage("/2Q.png");
             playerImg = p.loadImage("/player.png");
@@ -22,18 +24,25 @@ export default function P5Canvas() {
         p.setup = function () {
           p.createCanvas(bgImg.width * 2, bgImg.height * 2).parent("p5-canvas");
           p.background(bgImg);
-            let thing = p.createImage(playerImg, 0, 0); // Draw the
-            console.log(thing)
+          p.image(playerImg, 75, 75, playerImg.width * 0.75, playerImg.height * 0.75)
         };
 
         p.draw = function () {
           p.fill(255, 0, 0);
+          let imgY = 75
+          if (animate) {
+            p.background(bgImg)
+            imgY += p.random(-3, 3)
+            activeSeconds += 0.1
+            if (activeSeconds >= 5) {
+              activeSeconds = 0
+              animate = false
+            }
+            p.image(playerImg, 75, imgY, p)
+          }
         };
         globalThis.addEventListener("move1", () => {
-            //animate player img
-            //TODO: twong
-            //idk wtf is going on here but i want to sleep
-            playerImg.position(100, 100)
+          animate = true
         });
         globalThis.addEventListener("move2", () => {
           // Perform some action on the canvas
