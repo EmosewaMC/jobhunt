@@ -15,6 +15,7 @@ import * as $worldMap from "./routes/worldMap.tsx";
 import * as $Counter from "./islands/Counter.tsx";
 import * as $MapIsland from "./islands/MapIsland.tsx";
 import * as $Nav from "./islands/Nav.tsx";
+import * as $P5Canvas from "./islands/P5Canvas.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -34,6 +35,7 @@ const manifest = {
     "./islands/Counter.tsx": $Counter,
     "./islands/MapIsland.tsx": $MapIsland,
     "./islands/Nav.tsx": $Nav,
+    "./islands/P5Canvas.tsx": $P5Canvas,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;
