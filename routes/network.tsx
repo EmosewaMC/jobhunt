@@ -1,7 +1,9 @@
 import { useSignal } from "@preact/signals";
-import NetworkButton from "../islands/NetworkButton.tsx";
+import type { Signal } from "@preact/signals";
+import { NetworkButton, NetworkProps, NetworkList} from "../islands/NetworkButton.tsx";
 
 import { Handlers } from "$fresh/server.ts";
+
 // import Form from "../islands/Form.tsx";
 
 // export default P5Canvas;
@@ -12,7 +14,7 @@ export default function Home() {
     <div class="px-4 py-8 mx-auto bg-[#86efac]">
       <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
         <h1 class="text-4xl font-bold">My Network</h1>
-        <canvas id="p5Canvas" class="w-full h-full"></canvas>
+		<NetworkList playerData={["player1", "player2"]}/>
         <p>
             This is where we will have the network/friend invite view.
         </p>
@@ -26,6 +28,10 @@ export const handler: Handlers = {
 	async POST(_req) {
 		const data = await _req.formData();
 		console.log(data);
-		return new Response(JSON.stringify("Reply from server"));
+		return new Response(JSON.stringify("Reply from server POST"));
+	},
+
+	async GET(_req) {
+		return new Response(JSON.stringify("Reply from server GET"));
 	}
 };
