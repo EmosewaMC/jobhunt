@@ -17,6 +17,8 @@ import * as $MapIsland from "./islands/MapIsland.tsx";
 import * as $Nav from "./islands/Nav.tsx";
 import * as $NetworkButton from "./islands/NetworkButton.tsx";
 import * as $P5Canvas from "./islands/P5Canvas.tsx";
+import * as $resume_ResumeIsland from "./islands/resume/ResumeIsland.tsx";
+import * as $resume_playerStats from "./islands/resume/playerStats.ts";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -38,6 +40,8 @@ const manifest = {
     "./islands/Nav.tsx": $Nav,
     "./islands/NetworkButton.tsx": $NetworkButton,
     "./islands/P5Canvas.tsx": $P5Canvas,
+    "./islands/resume/ResumeIsland.tsx": $resume_ResumeIsland,
+    "./islands/resume/playerStats.ts": $resume_playerStats,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;
