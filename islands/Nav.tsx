@@ -1,7 +1,14 @@
 import { Button } from "../components/Button.tsx";
 
+function onSignIn(googleUser: any) {
+  const profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+}
+
 export default function Nav() {
-  const thing = <div>hi</div>;
   return (
     <aside class="w-64 h-full bg-gray-800 text-white flex flex-col">
       <meta name="google-signin-client_id" content="152562187584-t91qmh2kpjmhlpnr092bkookbqopv80n.apps.googleusercontent.com"></meta>
@@ -20,7 +27,6 @@ export default function Nav() {
       </nav>
       <div class="px-4 py-4 border-t border-gray-700 text-black">
         <div class="g-signin2 w-full font-bold bg-blue-500 hover:bg-blue-700  py-2 px-4 rounded" data-onsuccess="onSignIn">
-          sign in
         </div>
       </div>
     </aside>
