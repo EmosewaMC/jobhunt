@@ -14,50 +14,37 @@ export default function P5Canvas() {
     //deno-lint-ignore
       new p5((p: any) => {
         let bgImg: any;
-        let playerImg: any;
-        let animate = false;
-        let activeSeconds = 0;
+        let persuasion = 0.5
         p.preload = function () {
-            bgImg = p.loadImage("/2Q.png");
-            playerImg = p.loadImage("/player.png");
+            bgImg = p.loadImage("/interview_sketch.png");
         };
         p.setup = function () {
-          p.createCanvas(bgImg.width * 2, bgImg.height * 2).parent("p5-canvas");
+          p.createCanvas(bgImg.width, bgImg.height).parent("p5-canvas");
           p.background(bgImg);
-          p.image(playerImg, 75, 75, playerImg.width * 0.75, playerImg.height * 0.75)
         };
 
         p.draw = function () {
-          p.fill(255, 0, 0);
-          let imgY = 75
-          if (animate) {
-            p.background(bgImg)
-            imgY += p.random(-3, 3)
-            activeSeconds += 0.1
-            if (activeSeconds >= 5) {
-              activeSeconds = 0
-              animate = false
-            }
-            p.image(playerImg, 75, imgY, p)
-          }
+          p.fill(255);
+          let barWidth = p.width * 0.6
+          let barHeight = p.height * 0.1
+          let barX = (p.width - barWidth) / 2
+          let barY = p.height - barHeight - p.height * 0.04
+          p.rect(barX, barY, barWidth, barHeight)
+
+          p.fill('cadetblue')
+          p.rect(barX, barY, barWidth * persuasion, barHeight)
         };
         globalThis.addEventListener("move1", () => {
-          animate = true
+          persuasion += 0.2
         });
         globalThis.addEventListener("move2", () => {
-          // Perform some action on the canvas
-          p.fill("red");
-          p.ellipse(p.width / 2, p.height / 2, 100, 100); // Example action: draw a red circle
+          persuasion += 0.1
         });
         globalThis.addEventListener("move3", () => {
-          // Perform some action on the canvas
-          p.fill("red");
-          p.ellipse(p.width / 2, p.height / 2, 100, 100); // Example action: draw a red circle
+          persuasion -= 0.2
         });
         globalThis.addEventListener("move4", () => {
-          // Perform some action on the canvas
-          p.fill("red");
-          p.ellipse(p.width / 2, p.height / 2, 100, 100); // Example action: draw a red circle
+          persuasion -= 0.1
         });
       }, document.body);
     };
