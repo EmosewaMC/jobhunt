@@ -36,15 +36,27 @@ export default function P5Canvas() {
         };
         globalThis.addEventListener("move1", () => {
           persuasion += 0.2
+          if (persuasion > 1) {
+            persuasion = 1
+          }
         });
         globalThis.addEventListener("move2", () => {
           persuasion += 0.1
+          if (persuasion > 1) {
+            persuasion = 1
+          }
         });
         globalThis.addEventListener("move3", () => {
           persuasion -= 0.2
+          if (persuasion < 0) {
+            persuasion = 0
+          }
         });
         globalThis.addEventListener("move4", () => {
           persuasion -= 0.1
+          if (persuasion < 0) {
+            persuasion = 0
+          }
         });
       }, document.body);
     };
