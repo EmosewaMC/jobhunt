@@ -5,10 +5,14 @@
 import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
 import * as $_layout from "./routes/_layout.tsx";
+import * as $api_auth_callback from "./routes/api/auth/callback.ts";
+import * as $api_auth_login from "./routes/api/auth/login.ts";
+import * as $api_auth_logout from "./routes/api/auth/logout.ts";
 import * as $api_joke from "./routes/api/joke.ts";
 import * as $greet_name_ from "./routes/greet/[name].tsx";
 import * as $index from "./routes/index.tsx";
 import * as $interview from "./routes/interview.tsx";
+import * as $login from "./routes/login.tsx";
 import * as $network from "./routes/network.tsx";
 import * as $resume from "./routes/resume.tsx";
 import * as $worldMap from "./routes/worldMap.tsx";
@@ -26,10 +30,14 @@ const manifest = {
     "./routes/_404.tsx": $_404,
     "./routes/_app.tsx": $_app,
     "./routes/_layout.tsx": $_layout,
+    "./routes/api/auth/callback.ts": $api_auth_callback,
+    "./routes/api/auth/login.ts": $api_auth_login,
+    "./routes/api/auth/logout.ts": $api_auth_logout,
     "./routes/api/joke.ts": $api_joke,
     "./routes/greet/[name].tsx": $greet_name_,
     "./routes/index.tsx": $index,
     "./routes/interview.tsx": $interview,
+    "./routes/login.tsx": $login,
     "./routes/network.tsx": $network,
     "./routes/resume.tsx": $resume,
     "./routes/worldMap.tsx": $worldMap,

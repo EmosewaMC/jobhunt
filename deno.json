@@ -32,7 +32,9 @@
     "tailwindcss/plugin": "npm:/tailwindcss@3.3.5/plugin.js",
     "$std/": "https://deno.land/std@0.211.0/",
     "p5": "https://ga.jspm.io/npm:p5@1.9.0/lib/p5.min.js",
-    "$utils/": "./utils/"
+    "$utils/": "./utils/",
+    "deno_kv_oauth": "https://deno.land/x/deno_kv_oauth@v0.10.0/mod.ts",
+    "icons/": "https://deno.land/x/tabler_icons_tsx@0.0.6/tsx/"
     
   },
   "compilerOptions": {
