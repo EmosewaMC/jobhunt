@@ -1,26 +1,9 @@
 import { useEffect } from "preact/hooks";
-function googleLoginResponse(response: any) {
+(globalThis as any).googleLoginResponse = function(response: any) {
   console.log(response);
-}
+};
 export default function Nav() {
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://accounts.google.com/gsi/client";
-    script.async = true;
-    document.head.appendChild(script);
-    script.onload = () => {
-      (globalThis as any)["googleLoginResponse"] = (response: any) => {
-        console.log(response);
-      };
-      window.onload = function () {
-        globalThis.google.accounts.id.initialize({
-          client_id: '152562187584-t91qmh2kpjmhlpnr092bkookbqopv80n',
-          callback: googleLoginResponse
-        });
-        google.accounts.id.prompt();
-      };
-    };
-  }, []);
+  
   return (
     <>
       <aside class="w-64 h-full bg-gray-800 text-white flex flex-col">
@@ -36,6 +19,7 @@ export default function Nav() {
             Temp Interview
           </a>
         </nav>
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
         <div
           id="g_id_onload"
           data-client_id="152562187584-t91qmh2kpjmhlpnr092bkookbqopv80n"
