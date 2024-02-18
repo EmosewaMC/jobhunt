@@ -1,6 +1,7 @@
 import {PlayerStats} from "./playerStats.ts";
 import { Chart } from "$fresh_charts/mod.ts";
 import { ChartColors, transparentize } from "$fresh_charts/utils.ts";
+import {kv} from "$utils/db.ts"; 
 //ref https://github.com/denoland/fresh_charts
 
 interface ResumeIslandProps {
