@@ -4,7 +4,7 @@
     "check": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx",
     "cli": "echo \"import '\\$fresh/src/dev/cli.ts'\" | deno run --unstable -A -",
     "manifest": "deno task cli manifest $(pwd)",
-    "start": "deno run -A --watch=static/,routes/ dev.ts",
+    "start": "deno run --unstable-kv -A --watch=static/,routes/ dev.ts",
     "build": "deno run -A dev.ts build",
     "preview": "deno run -A main.ts",
     "update": "deno run -A -r https://fresh.deno.dev/update ."
@@ -31,7 +31,8 @@
     "tailwindcss/": "npm:/tailwindcss@3.3.5/",
     "tailwindcss/plugin": "npm:/tailwindcss@3.3.5/plugin.js",
     "$std/": "https://deno.land/std@0.211.0/",
-    "p5": "https://ga.jspm.io/npm:p5@1.9.0/lib/p5.min.js"
+    "p5": "https://ga.jspm.io/npm:p5@1.9.0/lib/p5.min.js",
+    "$utils/": "./utils/"
     
   },
   "compilerOptions": {
