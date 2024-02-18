@@ -1,9 +1,5 @@
-import { useEffect } from "preact/hooks";
-(globalThis as any).googleLoginResponse = function(response: any) {
-  console.log(response);
-};
+import GoogleIcon from "icons/brand-google-filled.tsx";
 export default function Nav() {
-  
   return (
     <>
       <aside class="w-64 h-full bg-gray-800 text-white flex flex-col">
@@ -18,28 +14,13 @@ export default function Nav() {
           <a href="/interview" class="py-2 hover:bg-gray-700 rounded">
             Temp Interview
           </a>
+          <a
+            href="/api/auth/login"
+            class="px-4 py-2 border rounded flex gap-4 hover:bg-gray-200 transition-all"
+          >
+            <GoogleIcon /> Login
+          </a>
         </nav>
-        <script src="https://accounts.google.com/gsi/client" async defer></script>
-        <div
-          id="g_id_onload"
-          data-client_id="152562187584-t91qmh2kpjmhlpnr092bkookbqopv80n"
-          data-context="signin"
-          data-ux_mode="popup"
-          data-callback="googleLoginResponse"
-          data-auto_prompt="false"
-        >
-        </div>
-
-        <div
-          class="g_id_signin"
-          data-type="standard"
-          data-shape="rectangular"
-          data-theme="outline"
-          data-text="signin"
-          data-size="medium"
-          data-logo_alignment="left"
-        >
-        </div>
       </aside>
     </>
   );
