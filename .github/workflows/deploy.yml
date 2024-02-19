@@ -31,3 +31,4 @@ jobs:
         with:
           project: "hifi-gameplay-12" # 📝 Update the deploy project name if necessary
           entrypoint: "./main.ts" # 📝 Update the entrypoint if necessary
+ 
