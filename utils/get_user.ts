@@ -4,7 +4,7 @@ import { getSessionId } from "deno_kv_oauth";
 export async function getUser(request: Request) {
   const sessionId = await getSessionId(request);
   if (!sessionId) return null;
-
+  return sessionId;
 //   const { data: session, error: sessionError } = await supabase
 //     .from("sessions")
 //     .select("*")

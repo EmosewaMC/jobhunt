@@ -1,14 +1,8 @@
+//ref: https://docs.deno.com/deploy/kv/manual
 export const deno_kv = await Deno.openKv();
+export async function isNewPlayer(googleID: string) {
+  const player = await deno_kv.get(["player",googleID]);
 
-// const prefs = {
-//   username: "ada",
-//   theme: "dark",
-//   language: "en-US",
-// };
+  return player.value === null;
 
-// const result = await kv.set(["preferences", "ada"], prefs);
-
-// const entry = await kv.get(["preferences", "ada"]);
-// console.log(entry.key);
-// console.log(entry.value);
-// console.log(entry.versionstamp);
+}

@@ -24,14 +24,3 @@ export default function Home() {
   );
 }
 
-export const handler: Handlers = {
-	async POST(_req) {
-		const data = await _req.formData();
-		console.log(data);
-		return new Response(JSON.stringify("Reply from server POST"));
-	},
-
-	async GET(_req) {
-		return new Response(JSON.stringify("Reply from server GET"));
-	}
-};

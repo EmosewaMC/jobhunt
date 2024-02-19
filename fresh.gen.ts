@@ -12,13 +12,13 @@ import * as $api_joke from "./routes/api/joke.ts";
 import * as $greet_name_ from "./routes/greet/[name].tsx";
 import * as $index from "./routes/index.tsx";
 import * as $interview from "./routes/interview.tsx";
-import * as $login from "./routes/login.tsx";
 import * as $network from "./routes/network.tsx";
 import * as $resume from "./routes/resume.tsx";
 import * as $worldMap from "./routes/worldMap.tsx";
 import * as $Counter from "./islands/Counter.tsx";
 import * as $MapIsland from "./islands/MapIsland.tsx";
 import * as $Nav from "./islands/Nav.tsx";
+import * as $NavLoggedIn from "./islands/NavLoggedIn.tsx";
 import * as $NetworkButton from "./islands/NetworkButton.tsx";
 import * as $P5Canvas from "./islands/P5Canvas.tsx";
 import * as $resume_ResumeIsland from "./islands/resume/ResumeIsland.tsx";
@@ -37,7 +37,6 @@ const manifest = {
     "./routes/greet/[name].tsx": $greet_name_,
     "./routes/index.tsx": $index,
     "./routes/interview.tsx": $interview,
-    "./routes/login.tsx": $login,
     "./routes/network.tsx": $network,
     "./routes/resume.tsx": $resume,
     "./routes/worldMap.tsx": $worldMap,
@@ -46,6 +45,7 @@ const manifest = {
     "./islands/Counter.tsx": $Counter,
     "./islands/MapIsland.tsx": $MapIsland,
     "./islands/Nav.tsx": $Nav,
+    "./islands/NavLoggedIn.tsx": $NavLoggedIn,
     "./islands/NetworkButton.tsx": $NetworkButton,
     "./islands/P5Canvas.tsx": $P5Canvas,
     "./islands/resume/ResumeIsland.tsx": $resume_ResumeIsland,

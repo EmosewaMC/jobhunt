@@ -1,8 +1,11 @@
 import { Handlers } from "$fresh/server.ts";
 import { handleCallback } from "deno_kv_oauth";
 import { oAuthConfig } from "$utils/auth.ts";
+import { isNewPlayer} from "$utils/db.ts";
+
 /** Properties guarenteed to exist on a google user */
 interface GoogleUser {
+  id: string;
   email: string;
   name: string;
   picture: string;
@@ -30,8 +33,13 @@ export const handler: Handlers = {
       oAuthConfig,
     );
     const googleUser = await getGoogleUser(tokens.accessToken);
-    console.log("googleUser info from /routes/api/auth/callback.ts:")
-    console.log(googleUser);
+    if(await isNewPlayer(googleUser.id)){
+      // init them with basic stats
+      console.log("New player")
+    } else {
+      console.log("Returning player")
+    }
+    
     // // Upsert user
     // const { data: userData, error: userError } = await supabase.from("users")
     //   .upsert({

@@ -1,6 +1,5 @@
 import GoogleIcon from "icons/brand-google-filled.tsx";
-import { FreshContext } from "$fresh/server.ts";
-
+import { getCookies, setCookie} from "$std/http/cookie.ts";
 export default function Nav() {
   return (
     <>
@@ -17,10 +16,10 @@ export default function Nav() {
             Temp Interview
           </a>
           <a
-            href="/api/auth/login"
+            href="/api/auth/logout"
             class="px-4 py-2 border rounded flex gap-4 hover:bg-gray-200 transition-all"
           >
-            <GoogleIcon /> Login
+            <GoogleIcon /> Logout
           </a>
         </nav>
       </aside>
