@@ -4,6 +4,7 @@
 
 import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
+import * as $_authError from "./routes/_authError.tsx";
 import * as $_layout from "./routes/_layout.tsx";
 import * as $api_auth_callback from "./routes/api/auth/callback.ts";
 import * as $api_auth_login from "./routes/api/auth/login.ts";
@@ -21,14 +22,14 @@ import * as $Nav from "./islands/Nav.tsx";
 import * as $NavLoggedIn from "./islands/NavLoggedIn.tsx";
 import * as $NetworkButton from "./islands/NetworkButton.tsx";
 import * as $P5Canvas from "./islands/P5Canvas.tsx";
-import * as $resume_ResumeIsland from "./islands/resume/ResumeIsland.tsx";
-import * as $resume_playerStats from "./islands/resume/playerStats.ts";
+import * as $ResumeIsland from "./islands/ResumeIsland.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
     "./routes/_404.tsx": $_404,
     "./routes/_app.tsx": $_app,
+    "./routes/_authError.tsx": $_authError,
     "./routes/_layout.tsx": $_layout,
     "./routes/api/auth/callback.ts": $api_auth_callback,
     "./routes/api/auth/login.ts": $api_auth_login,
@@ -48,8 +49,7 @@ const manifest = {
     "./islands/NavLoggedIn.tsx": $NavLoggedIn,
     "./islands/NetworkButton.tsx": $NetworkButton,
     "./islands/P5Canvas.tsx": $P5Canvas,
-    "./islands/resume/ResumeIsland.tsx": $resume_ResumeIsland,
-    "./islands/resume/playerStats.ts": $resume_playerStats,
+    "./islands/ResumeIsland.tsx": $ResumeIsland,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

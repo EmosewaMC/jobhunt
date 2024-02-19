@@ -1,14 +1,23 @@
 import { useSignal } from "@preact/signals";
-
-import { useState } from "preact/hooks";
-
+import type { FreshContext } from "$fresh/server.ts";
+import { deno_kv, isNewPlayer} from "$utils/db.ts";
+import { getUser} from "$utils/get_user.ts"; 
+import { redirect} from "$utils/response.ts";
+import { getSessionId } from "deno_kv_oauth";
+import {Player} from "gameData/playerStats.ts";
 //ref https://github.com/denoland/fresh_charts
 
-import ResumeIsland from "../islands/resume/ResumeIsland.tsx";
+import ResumeIsland from "../islands/ResumeIsland.tsx";
 
-export default function Home() {
-
-  const count = useSignal(3);
+export default async function Home(req: Request, ctx: FreshContext) {
+  const sessionId = await getSessionId(req);
+  console.log("sessionid: ", sessionId);
+  if(!sessionId) return redirect("/api/auth/login");
+  const userHasSession = await deno_kv.get(["activeSessions",sessionId!]);
+  console.log("userHasSession: ", userHasSession);
+  const kvUser = await deno_kv.get(["player",userHasSession.value as string]);
+  const player = kvUser.value as Player;
+  console.log("player: ", player);
   return (
     <div class="px-4 py-8 mx-auto bg-[#86efac]">
       <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
@@ -18,7 +27,8 @@ export default function Home() {
         <ResumeIsland player={{charisma: 0, motivation: 0, technicalSkills: 0, likability: 0}}/>
       </div>
         <p>
-            This is where we will have the stats page. 
+            Your data from the database: <br/>
+            {JSON.stringify(player)}
         </p>
       </div>
     </div>

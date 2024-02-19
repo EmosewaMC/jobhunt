@@ -34,7 +34,8 @@
     "p5": "https://ga.jspm.io/npm:p5@1.9.0/lib/p5.min.js",
     "$utils/": "./utils/",
     "deno_kv_oauth": "https://deno.land/x/deno_kv_oauth@v0.10.0/mod.ts",
-    "icons/": "https://deno.land/x/tabler_icons_tsx@0.0.6/tsx/"
+    "icons/": "https://deno.land/x/tabler_icons_tsx@0.0.6/tsx/",
+    "gameData/": "./gameData/"
     
   },
   "compilerOptions": {

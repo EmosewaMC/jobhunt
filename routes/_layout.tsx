@@ -8,7 +8,6 @@ import { FreshContext } from "$fresh/server.ts";
 
 export default async function Layout(req: Request, ctx: FreshContext) {
   const user = await getUser(req);
-  // const user = await req.headers.get("loggedIn");
   return (
     <>
       <Head>
