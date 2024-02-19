@@ -24,6 +24,9 @@ jobs:
           deno-version: v1.x
 
       - name: Build step
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
         run: "deno task build" # 📝 Update the build command(s) if necessary
 
       - name: Upload to Deno Deploy
