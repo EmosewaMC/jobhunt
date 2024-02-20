@@ -42,10 +42,35 @@ function MapComponent() {
   if (!leaf) return <div>Component placeholder</div>;
   useEffect(() => {
     const map = leaf.map("map").setView(leaf.latLng(0, 0), 2);
-    leaf.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(map);
+
+    // Define bounds for the image
+    const southWest = leaf.latLng(-100, -400),
+    northEast = leaf.latLng(100, 400),
+    bounds = leaf.latLngBounds(southWest, northEast);
+
+    // Add the image overlay
+    // Replace 'YOUR_IMAGE_URL_HERE' with the URL of your image
+    leaf.imageOverlay('/temp_map.png', bounds).addTo(map);
+    map.fitBounds(bounds);
+    map.setMaxBounds(bounds);
+
+    const location = leaf.latLng(-50, 100);
+    const marker = leaf.marker(location).addTo(map)
+    marker.bindPopup('Click to proceed to interview.')
+
+   // Redirect on click
+    marker.on('click', () => {
+      window.location.href = '/interview';
+    });
+
+    marker.on('mouseover', function (e) {
+      this.openPopup();
+    });
+  
+    // Optional: Close popup on mouse out
+    marker.on('mouseout', function (e) {
+      this.closePopup();
+    });
   });
   return <div id="map" class="relative w-[80vw] h-[50vh]" />;
 }
