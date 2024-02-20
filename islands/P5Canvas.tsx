@@ -21,6 +21,8 @@ export default function P5Canvas() {
         p.setup = function () {
           p.createCanvas(bgImg.width, bgImg.height).parent("p5-canvas");
           p.background(bgImg);
+          p.textSize(16)
+          p.text('persuasion meter', p.width * 0.2, p.height * 0.85)
         };
 
         p.draw = function () {
