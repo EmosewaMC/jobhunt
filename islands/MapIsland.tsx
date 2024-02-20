@@ -62,6 +62,15 @@ function MapComponent() {
     marker.on('click', () => {
       window.location.href = '/interview';
     });
+
+    marker.on('mouseover', function (e) {
+      this.openPopup();
+    });
+  
+    // Optional: Close popup on mouse out
+    marker.on('mouseout', function (e) {
+      this.closePopup();
+    });
   });
   return <div id="map" class="relative w-[80vw] h-[50vh]" />;
 }
