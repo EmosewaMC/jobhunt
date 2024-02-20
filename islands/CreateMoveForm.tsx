@@ -60,18 +60,27 @@ interface CreateMoveFormsProps {
 }
 
 export default function CreateMoveForms({ player }: CreateMoveFormsProps) {
-    const unallocatedPoints = useSignal(player.unspentPoints);
-  
-    const handlePointsChange = (delta: number) => {
-      const newPoints = unallocatedPoints.value + delta;
-      unallocatedPoints.value = Math.max(newPoints, 0);  // Ensure unallocatedPoints don't go negative
-    };
-  
-    return (
-      <Fragment>
-        <p>Unallocated Points: {unallocatedPoints.value}</p>
-        {/* Render MoveForms, passing unallocatedPoints and handlePointsChange */}
-      </Fragment>
-    );
-  }
-  
+  // Calculate the number of additional new move forms to display
+  const unallocatedPoints = useSignal(player.unspentPoints);
+
+  const handlePointsChange = (delta: number) => {
+    const newPoints = unallocatedPoints.value + delta;
+    unallocatedPoints.value = newPoints >= 0 ? newPoints : 0;  // Prevent negative unallocated points
+  };
+  const additionalForms = Math.min(
+    Math.max(1, player.level - player.moves.length),
+    4 - player.moves.length,
+  );
+
+  return (
+    <Fragment>
+      <p>Unallocated Points: {unallocatedPoints.value}</p>
+      {player.moves.map((move, index) => (
+        <MoveForm key={index} move={move} onPointsChange={handlePointsChange} unallocatedPoints={unallocatedPoints.value}/>
+      ))}
+      {Array.from({ length: additionalForms }, (_, index) => (
+        <MoveForm key={`new-${index}`} move={null} onPointsChange={handlePointsChange} unallocatedPoints={unallocatedPoints.value}/>
+      ))}
+    </Fragment>
+  );
+}
