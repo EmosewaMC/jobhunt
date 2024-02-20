@@ -4,13 +4,14 @@ import { getSessionId } from "deno_kv_oauth";
 import { deno_kv } from "$utils/db.ts";
 import type { Player } from "gameData/playerStats.ts";
 import type { Handlers, PageProps } from "$fresh/server.ts";
+import { redirect } from "$utils/response.ts";
 
 export const handler: Handlers<Player | null> = {
   async GET(req, ctx) {
     const sessionId = await getSessionId(req);
 
     if (!sessionId) {
-      return ctx.render(null);
+      if(!sessionId) return redirect("/api/auth/login");
     }
 
     const userHasSession = await deno_kv.get(["activeSessions", sessionId]);

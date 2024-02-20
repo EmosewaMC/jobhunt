@@ -30,7 +30,7 @@ export function initPlayer(googleId: string): Player {
         },
         level: 1,
         moves: [],
-        unspentPoints: 0,
+        unspentPoints: 10,
         friendsList: [],
     };
 }
