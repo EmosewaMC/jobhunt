@@ -8,7 +8,7 @@ const isDenoDeploy = Deno.env.get("DENO_DEPLOYMENT_ID") !== undefined;
 export const oAuthConfig = noRunOnBuild(() =>
   createGoogleOAuthConfig({
     redirectUri: isDenoDeploy
-      ? "https://hifi-gameplay-12.deno.dev/api/auth/callback"
+      ? Deno.env.get("PROD_URL") + "/api/auth/callback"
       : "http://localhost:8000/api/auth/callback",
     scope: [
       "https://www.googleapis.com/auth/userinfo.email",
