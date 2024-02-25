@@ -32,9 +32,11 @@ export const handler: Handlers = {
       request,
       oAuthConfig,
     );
+	console.log(tokens);
+	console.log(sessionId);
     const googleUser = await getGoogleUser(tokens.accessToken);
     if(await isNewPlayer(googleUser.id)){
-      deno_kv.set(["player"], initPlayer(googleUser.id));
+      deno_kv.set(["player", googleUser.id], initPlayer(googleUser.id, googleUser.name));
     } 
     deno_kv.set(["activeSessions",sessionId], googleUser.id);
     

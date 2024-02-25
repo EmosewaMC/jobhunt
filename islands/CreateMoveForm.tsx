@@ -17,7 +17,7 @@ function MoveForm({ move, onPointsChange, unallocatedPoints }: MoveFormProps) {
     }, {} as Record<string, Signal<number>>);
 
   const handleIncrement = (signal: Signal<number>) => {
-    if (signal.value >= 0) {
+    if (signal.value >= 0 && unallocatedPoints > 0) { //Credit: Amanda
       signal.value++;
       onPointsChange(-1);  // Subtracting from unallocated points
     }

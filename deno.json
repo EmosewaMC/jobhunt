@@ -2,6 +2,7 @@
   "lock": false,
   "tasks": {
     "check": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx",
+    "clear": "deno run --unstable-kv -A utils/clearDB.ts",
     "cli": "echo \"import '\\$fresh/src/dev/cli.ts'\" | deno run --unstable -A -",
     "manifest": "deno task cli manifest $(pwd)",
     "start": "deno run --unstable-kv -A --watch=static/,routes/ dev.ts",
