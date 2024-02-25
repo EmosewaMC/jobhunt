@@ -1,5 +1,6 @@
 import "$std/dotenv/load.ts";
-const db = await Deno.openKv("https://api.deno.com/databases/a918e2d5-442a-4217-9ce8-a5f50ba9fe26/connect");
+import { isDenoDeploy } from "./build.ts";
+const db = isDenoDeploy() ? await Deno.openKv("https://api.deno.com/databases/a918e2d5-442a-4217-9ce8-a5f50ba9fe26/connect") : await Deno.openKv();
 
 export async function getAllKeys() {
     const allKeys = []
@@ -30,17 +31,4 @@ export async function clearUnknown() {
     console.log('Clearing ALL db entries!');
     console.log(db.list({ prefix: [] }));
     clearUnknown();
-})();
-
-//this runs by default, but it will clear the ENTIRE db
-(async () => {
-    console.log('Clearing ALL local db entries!');
-    const local = await Deno.openKv();
-    const dbEntries = local.list({ prefix: [] })
-    console.log(dbEntries);
-    for await (const entry of dbEntries) {
-        console.log(entry);
-        local.delete(entry.key);
-    }
-    // clearUnknown();
 })();
