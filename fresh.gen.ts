@@ -16,7 +16,6 @@ import * as $interview from "./routes/interview.tsx";
 import * as $network from "./routes/network.tsx";
 import * as $resume from "./routes/resume.tsx";
 import * as $worldMap from "./routes/worldMap.tsx";
-import * as $Counter from "./islands/Counter.tsx";
 import * as $CreateMoveForm from "./islands/CreateMoveForm.tsx";
 import * as $MapIsland from "./islands/MapIsland.tsx";
 import * as $Nav from "./islands/Nav.tsx";
@@ -44,7 +43,6 @@ const manifest = {
     "./routes/worldMap.tsx": $worldMap,
   },
   islands: {
-    "./islands/Counter.tsx": $Counter,
     "./islands/CreateMoveForm.tsx": $CreateMoveForm,
     "./islands/MapIsland.tsx": $MapIsland,
     "./islands/Nav.tsx": $Nav,

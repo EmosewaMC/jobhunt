@@ -4,12 +4,15 @@ export interface PlayerStats {
     technicalSkills: number;
     likability: number;
 }
+
 export interface PlayerMove {
     move: string;
     pointsAllocated: PlayerStats;
 } 
+
 export interface Player {
     googleId: string;
+	googleName: string;
     experience: number;
     stats: PlayerStats;
     level: number;
@@ -18,9 +21,10 @@ export interface Player {
     friendsList: string[];
 }
 
-export function initPlayer(googleId: string): Player {
+export function initPlayer(googleId: string, googleName: string): Player {
     return {
         googleId: googleId,
+		googleName: googleName,
         experience: 0,
         stats: {
             charisma: 0,
