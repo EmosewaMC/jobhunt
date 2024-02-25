@@ -1,5 +1,6 @@
 import "$std/dotenv/load.ts";
-const db = await Deno.openKv("https://api.deno.com/databases/a918e2d5-442a-4217-9ce8-a5f50ba9fe26/connect");
+import { isDenoDeploy } from "./build.ts";
+const db = isDenoDeploy() ? await Deno.openKv("https://api.deno.com/databases/a918e2d5-442a-4217-9ce8-a5f50ba9fe26/connect") : await Deno.openKv();
 
 export async function getAllKeys() {
     const allKeys = []
