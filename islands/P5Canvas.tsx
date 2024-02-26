@@ -1,11 +1,14 @@
 // deno-lint-ignore-file
 import { useEffect } from "preact/hooks";
 import { Button } from "../components/Button.tsx";
+import { isWindowsDeviceRoot } from "$std/path/windows/_util.ts";
 //NOTE: This route will not be available through the nav later once we setup reaching here from the map route
 function dispatchMove(moveNum: number) {
   globalThis.dispatchEvent(new CustomEvent("move" + moveNum));
 }
-export default function P5Canvas() {
+export default function P5Canvas(user: {isLoggedIn: boolean}) {
+  const backPathname: string = user.isLoggedIn ? "/worldMap" : "/";
+  const retryPathname: string = "/interview";
   useEffect(() => {
     // Dynamically load p5.js
     const script = document.createElement("script");
@@ -93,13 +96,13 @@ export default function P5Canvas() {
     <>
       <dialog id="winDialog">
         <h2>You Win!</h2>
-        <button onClick={() => window.location.href = '/worldMap'}>Back to Map</button>
+        <button onClick={ () => window.location.pathname = backPathname}>Back to Map</button>
       </dialog>
 
       <dialog id="loseDialog">
         <h2>You Lost</h2>
-        <button onClick={() => window.location.href = '/interview'}>Retry?</button>
-        <button onClick={() => window.location.href = '/worldMap'}>Back to Map</button>
+        <button onClick={() => window.location.pathname = retryPathname}>Retry?</button>
+        <button onClick={() => window.location.pathname = backPathname}>Back to Map</button>
       </dialog>
       <div>
         <div id="p5-canvas"></div>

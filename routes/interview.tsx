@@ -1,21 +1,19 @@
-import { useSignal } from "@preact/signals";
-import { Button } from "../components/Button.tsx";
 import P5Canvas from "../islands/P5Canvas.tsx";
-// export default P5Canvas;
+import { getUser } from "$utils/get_user.ts";
+import type { Player } from "gameData/playerStats.ts";
 
 //NOTE: This route will not be available through the nav later once we setup reaching here from the map route
 function dispatchMove(moveNum: number) {
   globalThis.dispatchEvent(new CustomEvent("move" + moveNum));
 }
-export default function Home() {
-
-  const count = useSignal(3);
-
+export default async function Home(req: Request) {
+  const user = await getUser(req) as Player;
+  console.log(req);
   return (
     <div class="px-4 py-8 mx-auto bg-[#86efac]">
       <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
         <h1 class="text-4xl font-bold">Interview</h1>
-        <P5Canvas />
+        <P5Canvas isLoggedIn={user!==null} />
 
       </div>
     </div>
