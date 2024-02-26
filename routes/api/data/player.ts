@@ -10,7 +10,7 @@ export const handler: Handlers = {
     // Convert FormData to a regular object for easier handling
     const moveData: { [key: string]: any } = {};
     for (const [key, value] of formData.entries()) {
-        moveData[key] = value;
+        moveData[`${key}`] = value;
     }
 
     // Generate a unique key for this entry (e.g., using a timestamp or UUID)

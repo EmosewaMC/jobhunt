@@ -2,7 +2,6 @@ import { Button } from "../components/Button.tsx";
 import { Player, PlayerMove, PlayerStats } from "gameData/playerStats.ts";
 import { Signal, useSignal } from "@preact/signals";
 import { Fragment } from "preact";
-import { useState } from "preact/hooks";
 
 interface MoveFormProps {
   move: PlayerMove | null; // null indicates a new move form
@@ -21,14 +20,14 @@ function MoveForm({ move, onPointsChange, unallocatedPoints }: MoveFormProps) {
   }, {} as Record<string, Signal<number>>);
   const moveSignal = useSignal(move);
 
-  const handleIncrement = (signal: Signal<number>, statName: string) => {
+  const handleIncrement = (signal: Signal<number>) => {
     if (signal.value >= 0 && unallocatedPoints > 0) {
       signal.value++;
       onPointsChange(-1);
     }
   };
 
-  const handleDecrement = (signal: Signal<number>, statName: string) => {
+  const handleDecrement = (signal: Signal<number>) => {
     if (signal.value > 0) {
       signal.value--;
       onPointsChange(1);
@@ -37,33 +36,36 @@ function MoveForm({ move, onPointsChange, unallocatedPoints }: MoveFormProps) {
 
   const counters = Object.entries(statsSignals).map(([key, signal]) => (
     <Fragment key={key}>
-      <div class="flex gap-8 py-6 items-center">
+      {/* <div class="flex gap-8 py-6 items-center justify-between"> */}
+      <div class="grid-cols-2">
         <label class="font-bold" for={`${move?.move}-${key}`}>
           {key.charAt(0).toUpperCase() + key.slice(1)}
         </label>
-        <Button
-          type="button"
-          onClick={() =>
-            handleDecrement(signal, key)}
-          aria-label={`Decrease ${key}`}
-        >
-          -1
-        </Button>
-        <p class="text-3xl tabular-nums" id={`${move?.move}-${key}`}>
-          {signal.value}
-        </p>
-        <input
-          type="hidden"
-          name={`${move?.move}-${key}`}
-          value={signal.value}
-        />
-        <Button
-          type="button"
-          onClick={() => handleIncrement(signal, key)}
-          aria-label={`Increase ${key}`}
-        >
-          +1
-        </Button>
+        <div class="flex  items-center justify-between">
+          <Button
+            type="button"
+            onClick={() =>
+              handleDecrement(signal)}
+            aria-label={`Decrease ${key}`}
+          >
+            -1
+          </Button>
+          <p class="text-3xl tabular-nums" id={`${move?.move}-${key}`}>
+            {signal.value}
+          </p>
+          <input
+            type="hidden"
+            name={key}
+            value={signal.value}
+          />
+          <Button
+            type="button"
+            onClick={() => handleIncrement(signal)}
+            aria-label={`Increase ${key}`}
+          >
+            +1
+          </Button>
+        </div>
       </div>
     </Fragment>
   ));
@@ -77,6 +79,7 @@ function MoveForm({ move, onPointsChange, unallocatedPoints }: MoveFormProps) {
           class="text-center"
           placeholder={move ? move.move : "New Move"}
           value={moveSignal.value?.move}
+          name="move"
         />
       </div>
       {counters}
@@ -88,24 +91,9 @@ interface CreateMoveFormsProps {
   player: Player;
 }
 
-interface MoveFormData {
-  move: string;
-  pointsAllocated: {
-    charisma: number;
-    motivation: number;
-    technicalSkills: number;
-    likability: number;
-  };
-}
 export default function CreateMoveForms({ player }: CreateMoveFormsProps) {
   // Calculate the number of additional new move forms to display
   const unallocatedPoints = useSignal(player.unspentPoints);
-  const [moveFormsData, setMoveFormsData] = useState<MoveFormData[]>(
-    player.moves.map((move) => ({
-      move: move.move,
-      pointsAllocated: move.pointsAllocated,
-    })),
-  );
   const handlePointsChange = (delta: number) => {
     const newPoints = unallocatedPoints.value + delta;
     unallocatedPoints.value = newPoints >= 0 ? newPoints : 0; // Prevent negative unallocated points
@@ -122,8 +110,8 @@ export default function CreateMoveForms({ player }: CreateMoveFormsProps) {
     console.log("Form data:", Object.fromEntries(formData.entries()));
 
     try {
-      const response = await fetch('/api/data/player', {
-        method: 'POST',
+      const response = await fetch("/api/data/player", {
+        method: "POST",
         body: formData, // FormData object can be directly used with fetch
         // If your API expects JSON, you might need to convert formData to JSON
         // headers: {
@@ -131,7 +119,7 @@ export default function CreateMoveForms({ player }: CreateMoveFormsProps) {
         // },
         // body: JSON.stringify(Object.fromEntries(formData.entries()))
       });
-  
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -154,6 +142,7 @@ export default function CreateMoveForms({ player }: CreateMoveFormsProps) {
             unallocatedPoints={unallocatedPoints.value}
           />
         ))}
+        {/* this doesn't need to be an array because the length will just be 1 but not important rn */}
         {Array.from(
           { length: additionalForms },
           (_, index) => (
