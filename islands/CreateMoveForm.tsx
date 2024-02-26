@@ -19,6 +19,7 @@ function MoveForm({ move, onPointsChange, unallocatedPoints }: MoveFormProps) {
     acc[key] = useSignal(value);
     return acc;
   }, {} as Record<string, Signal<number>>);
+  const moveSignal = useSignal(move);
 
   const handleIncrement = (signal: Signal<number>, statName: string) => {
     if (signal.value >= 0 && unallocatedPoints > 0) {
@@ -67,18 +68,19 @@ function MoveForm({ move, onPointsChange, unallocatedPoints }: MoveFormProps) {
     </Fragment>
   ));
   return (
-    <form>
+    <div>
       <div class="text-2xl font-bold text-center">
         <label for="move-name">Move Name</label>
+        {/* if we have a move name, we want to just return an unmodifiable <input> */}
         <input
           id="move-name"
           class="text-center"
           placeholder={move ? move.move : "New Move"}
-          value={move ? move.move : ""}
+          value={moveSignal.value?.move}
         />
       </div>
       {counters}
-    </form>
+    </div>
   );
 }
 
@@ -117,9 +119,9 @@ export default function CreateMoveForms({ player }: CreateMoveFormsProps) {
   const handleSubmit = async (e: Event) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement); // Cast the event target to a form element
+    console.log("Form data:", Object.fromEntries(formData.entries()));
 
     try {
-      // Replace 'your-api-endpoint' with the actual endpoint URL
       const response = await fetch('/api/data/player', {
         method: 'POST',
         body: formData, // FormData object can be directly used with fetch
@@ -133,7 +135,6 @@ export default function CreateMoveForms({ player }: CreateMoveFormsProps) {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-  
       // Handle response data as needed
       const result = await response.json();
       console.log("Response from the server:", result);
