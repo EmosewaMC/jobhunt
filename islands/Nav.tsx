@@ -10,9 +10,6 @@ export default function Nav() {
         </div>
         <nav class="flex flex-col flex-1 px-4 py-8">
           <a href="/" class="py-2 hover:bg-gray-700 rounded">Home</a>
-          <a href="/worldMap" class="py-2 hover:bg-gray-700 rounded">Map</a>
-          <a href="/resume" class="py-2 hover:bg-gray-700 rounded">Resume</a>
-          <a href="/network" class="py-2 hover:bg-gray-700 rounded">Network</a>
           <a href="/interview" class="py-2 hover:bg-gray-700 rounded">
             Temp Interview
           </a>

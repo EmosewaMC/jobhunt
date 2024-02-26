@@ -1,5 +1,4 @@
 import GoogleIcon from "icons/brand-google-filled.tsx";
-import { getCookies, setCookie} from "$std/http/cookie.ts";
 export default function Nav() {
   return (
     <>

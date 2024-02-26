@@ -3,6 +3,7 @@ import { handleCallback } from "deno_kv_oauth";
 import { oAuthConfig } from "$utils/auth.ts";
 import { deno_kv, isNewPlayer} from "$utils/db.ts";
 import { initPlayer} from "gameData/playerStats.ts";
+import { redirect } from "$utils/response.ts";
 /** Properties guarenteed to exist on a google user */
 interface GoogleUser {
   id: string;
@@ -28,12 +29,14 @@ async function getGoogleUser(accessToken: string): Promise<GoogleUser> {
 // Handle the callback (redirect to dashboard)
 export const handler: Handlers = {
   async GET(request) {
-    const { response,sessionId, tokens } = await handleCallback(
-      request,
-      oAuthConfig,
-    );
-	console.log(tokens);
-	console.log(sessionId);
+	const loginCallback = handleCallback(request, oAuthConfig);
+	try {
+		await loginCallback;
+	} catch (e) {
+		// Just ignore the error
+		return redirect("/");
+	}
+    const { response,sessionId, tokens } = await loginCallback;
     const googleUser = await getGoogleUser(tokens.accessToken);
     if(await isNewPlayer(googleUser.id)){
       deno_kv.set(["player", googleUser.id], initPlayer(googleUser.id, googleUser.name));
