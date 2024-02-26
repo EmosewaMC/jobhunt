@@ -44,7 +44,6 @@ export default function ResumePage({ data }: PageProps<Player | null>) {
           {({ player }) => (
             <div>
               <CreateMoveForm player={player} />
-              {/* Additional components */}
             </div>
           )}
         </AsyncLayout>
