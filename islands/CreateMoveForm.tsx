@@ -4,12 +4,15 @@ import { Signal, useSignal } from "@preact/signals";
 import { Fragment } from "preact";
 
 interface MoveFormProps {
+  index: number;
   move: PlayerMove | null; // null indicates a new move form
   onPointsChange: (delta: number) => void; // Function to handle point allocation changes
   unallocatedPoints: number;
 }
 
-function MoveForm({ move, onPointsChange, unallocatedPoints }: MoveFormProps) {
+function MoveForm(
+  { index, move, onPointsChange, unallocatedPoints }: MoveFormProps,
+) {
   const statsSignals = Object.entries(
     move
       ? move.pointsAllocated
@@ -55,9 +58,10 @@ function MoveForm({ move, onPointsChange, unallocatedPoints }: MoveFormProps) {
           </p>
           <input
             type="hidden"
-            name={key}
+            name={`moves[${index}].${key}`}
             value={signal.value}
           />
+
           <Button
             type="button"
             onClick={() => handleIncrement(signal)}
@@ -75,11 +79,12 @@ function MoveForm({ move, onPointsChange, unallocatedPoints }: MoveFormProps) {
         <label for="move-name">Move Name</label>
         {/* if we have a move name, we want to just return an unmodifiable <input> */}
         <input
-          id="move-name"
+          id={`move-name-${index}`}
           class="text-center"
           placeholder={move ? move.move : "New Move"}
           value={moveSignal.value?.move}
-          name="move"
+          // readOnly={move !== null}
+          name={`moves[${index}].move`}
         />
       </div>
       {counters}
@@ -99,61 +104,99 @@ export default function CreateMoveForms({ player }: CreateMoveFormsProps) {
     unallocatedPoints.value = newPoints >= 0 ? newPoints : 0; // Prevent negative unallocated points
   };
 
-  // Limit the number of additional forms to 4
-  const additionalForms = Math.min(
-    Math.max(1, player.level - player.moves.length),
-    4 - player.moves.length,
-  );
-  const handleSubmit = async (e: Event) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement); // Cast the event target to a form element
-    console.log("Form data:", Object.fromEntries(formData.entries()));
+    const formData = new FormData(e.target as HTMLFormElement);
+
+    const moves = [];
+
+    // Parse the FormData entries
+    for (const [key, value] of formData.entries()) {
+      const keyMatch = key.match(/^moves\[(\d+)]\.(.+)/);
+      if (keyMatch) {
+        const [_, indexStr, attribute] = keyMatch;
+        const index = parseInt(indexStr, 10);
+
+        moves[index] = moves[index] || { move: "", pointsAllocated: {} };
+
+        if (attribute === "move") {
+          moves[index].move = value;
+        } else {
+          moves[index].pointsAllocated[attribute] = parseInt(value, 10);
+        }
+      }
+    }
+
+    // Update player object
+    const updatedPlayer = {
+      ...player,
+      moves,
+      unspentPoints: unallocatedPoints.value,
+    };
+
+    console.log("Updated Player:", updatedPlayer);
+    const fd = new FormData();
+    fd.append("player", JSON.stringify(updatedPlayer));
 
     try {
       const response = await fetch("/api/data/player", {
         method: "POST",
-        body: formData, // FormData object can be directly used with fetch
-        // If your API expects JSON, you might need to convert formData to JSON
-        // headers: {
-        //   'Content-Type': 'application/json'
-        // },
-        // body: JSON.stringify(Object.fromEntries(formData.entries()))
+        body: fd,
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      // Handle response data as needed
-      const result = await response.json();
-      console.log("Response from the server:", result);
+
+      // Optionally, process the response data if needed
+      const responseData = await response.json();
+      console.log("Server Response:", responseData);
+
+      // Here you might want to update the UI or state based on the response
+      // For example, show a success message, reset form, or update local player data
     } catch (error) {
-      console.error("Submission error:", error);
+      console.error("Failed to update player data:", error);
+      // Here you could show an error message to the user or retry the request
     }
   };
+
+  const canMakeNewMove = player.moves.length - player.level &&
+    player.moves.length <= 4;
   return (
     <Fragment>
       <form onSubmit={handleSubmit}>
         <p>Unallocated Points: {unallocatedPoints.value}</p>
         {player.moves.map((move, index) => (
           <MoveForm
+            index={index}
             key={index}
             move={move}
             onPointsChange={handlePointsChange}
             unallocatedPoints={unallocatedPoints.value}
           />
         ))}
-        {/* this doesn't need to be an array because the length will just be 1 but not important rn */}
-        {Array.from(
-          { length: additionalForms },
-          (_, index) => (
+        {canMakeNewMove
+          ? (
             <MoveForm
-              key={`new-${index}`}
-              move={null}
+              index={player.moves.length}
+              key={player.moves.length}
+              move={{
+                move: "",
+                pointsAllocated: {
+                  charisma: 0,
+                  motivation: 0,
+                  technicalSkills: 0,
+                  likability: 0,
+                },
+              }}
               onPointsChange={handlePointsChange}
               unallocatedPoints={unallocatedPoints.value}
             />
-          ),
-        )}
+          )
+          : null}
         <Button type="submit">Submit</Button>
       </form>
     </Fragment>
