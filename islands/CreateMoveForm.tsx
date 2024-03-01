@@ -150,7 +150,6 @@ export default function CreateMoveForms({ player }: CreateMoveFormsProps) {
       const response = await fetch("/api/data/player", {
         method: "POST",
         body: fd,
-        
       });
 
       if (!response.ok) {

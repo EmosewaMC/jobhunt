@@ -14,7 +14,7 @@ export default function P5Canvas(user: {isLoggedIn: boolean}) {
     const script = document.createElement("script");
     script.src = "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js";
     script.onload = () => {
-    //deno-lint-ignore
+    //@ts-ignore
       new p5((p: any) => {
         let bgImg: any;
         let persuasion = 0.5
@@ -45,16 +45,17 @@ export default function P5Canvas(user: {isLoggedIn: boolean}) {
           p.fill('cadetblue')
           p.rect(barX, barY, barWidth * persuasion, barHeight)
         };
-
+        const winDialog = document.getElementById('winDialog') as HTMLDialogElement;
+        const loseDialog = document.getElementById('loseDialog') as HTMLDialogElement;
         p.winScreen = function () {
-          document.getElementById('winDialog').showModal();
+          winDialog.showModal();
         }
 
         p.loseScreen = function() {
-          document.getElementById('loseDialog').showModal();
+          loseDialog.showModal();
         }
         
-        p.goTo = function (link) {
+        p.goTo = function (link: string) {
           window.location.href = link;
         }
         

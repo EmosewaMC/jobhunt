@@ -18,8 +18,11 @@ export const handler: Handlers = {
       console.log("Writing Player Object to db:", playerObj);
       deno_kv.set(["player", playerObj.googleId], playerObj);
       return new Response(JSON.stringify({ message: "Move data stored successfully" }), {
-        headers: { "Content-Type": "application/json" },
-        status: 200, // OK
+        headers: {
+          location: "/resume",
+        },
+        // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/302
+        status: 302
       });
     } catch (error) {
       console.error("Error writing move to deno_kv:", error);
