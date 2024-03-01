@@ -21,7 +21,11 @@ function MoveForm(
     acc[key] = useSignal(value);
     return acc;
   }, {} as Record<string, Signal<number>>);
-  const moveSignal = useSignal(move);
+  const moveSignal  = useSignal(move) as Signal<PlayerMove>;
+  const handleNameChange = (e: Event) => {
+    const target = e.target as HTMLInputElement;
+    moveSignal.value = { ...moveSignal.value, move: target.value };
+  }
 
   const handleIncrement = (signal: Signal<number>) => {
     if (signal.value >= 0 && unallocatedPoints > 0) {
@@ -83,6 +87,7 @@ function MoveForm(
           class="text-center"
           placeholder={move ? move.move : "New Move"}
           value={moveSignal.value?.move}
+          onChange={handleNameChange}
           // readOnly={move !== null}
           name={`moves[${index}].move`}
         />
@@ -104,11 +109,11 @@ export default function CreateMoveForms({ player }: CreateMoveFormsProps) {
     unallocatedPoints.value = newPoints >= 0 ? newPoints : 0; // Prevent negative unallocated points
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: Event) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
 
-    const moves = [];
+    const moves: PlayerMove[] = [];
 
     // Parse the FormData entries
     for (const [key, value] of formData.entries()) {
@@ -120,8 +125,10 @@ export default function CreateMoveForms({ player }: CreateMoveFormsProps) {
         moves[index] = moves[index] || { move: "", pointsAllocated: {} };
 
         if (attribute === "move") {
+          // @ts-ignore: FormDataEntryValue is a string
           moves[index].move = value;
         } else {
+          // @ts-ignore: FormDataEntryValue is a string
           moves[index].pointsAllocated[attribute] = parseInt(value, 10);
         }
       }
@@ -137,14 +144,13 @@ export default function CreateMoveForms({ player }: CreateMoveFormsProps) {
     console.log("Updated Player:", updatedPlayer);
     const fd = new FormData();
     fd.append("player", JSON.stringify(updatedPlayer));
+    console.log("Form Data:", fd);
 
     try {
       const response = await fetch("/api/data/player", {
         method: "POST",
         body: fd,
-        headers: {
-          "Content-Type": "application/json",
-        },
+        
       });
 
       if (!response.ok) {
