@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-16" ?>
+<localization>
+    <locales count="3">
+        <locale>en_US</locale>
+        <locale>de_CN</locale>
+        <locale>as_AB</locale>
+    </locales>
+    <phrases>
+        <phrase id="MY_NETWORK">
+            <translation locale="en_US">My Network</translation>
+            <translation locale="de_CN">我的網絡</translation>
+            <translation locale="as_AB">شبكتي</translation>
+        </phrase>
+    </phrases>
+</localization>
