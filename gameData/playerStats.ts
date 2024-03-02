@@ -12,7 +12,7 @@ export interface PlayerMove {
 
 export interface Player {
     googleId: string;
-	googleName: string;
+    googleName: string;
     experience: number;
     stats: PlayerStats;
     level: number;
