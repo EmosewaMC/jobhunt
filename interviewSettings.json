@@ -1,0 +1,72 @@
+[
+    {
+        "level": 1,
+        "prompts": [
+            {
+                "charisma": 9,
+                "motivation": 0,
+                "technicalSkills": 0,
+                "likability": 1
+            },
+            {
+                "charisma": 5,
+                "motivation": 4,
+                "technicalSkills": 1,
+                "likability": 0
+            },
+            {
+                "charisma": 4,
+                "motivation": 5,
+                "technicalSkills": 1,
+                "likability": 0
+            },
+            {
+                "charisma": 1,
+                "motivation": 6,
+                "technicalSkills": 0,
+                "likability": 3
+            },
+            {
+                "charisma": 1,
+                "motivation": 5,
+                "technicalSkills": 2,
+                "likability": 2
+            }
+        ]
+    },
+    {
+        "level": 2,
+        "prompts": [
+            {
+                "charisma": 15,
+                "motivation": 0,
+                "technicalSkills": 2,
+                "likability": 3
+            },
+            {
+                "charisma": 1,
+                "motivation": 12,
+                "technicalSkills": 4,
+                "likability": 3
+            },
+            {
+                "charisma": 0,
+                "motivation": 17,
+                "technicalSkills": 2,
+                "likability": 1
+            },
+            {
+                "charisma": 0,
+                "motivation": 5,
+                "technicalSkills": 12,
+                "likability": 3
+            },
+            {
+                "charisma": 16,
+                "motivation": 0,
+                "technicalSkills": 3,
+                "likability": 1
+            }
+        ]
+    }
+]
