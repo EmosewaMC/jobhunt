@@ -4,5 +4,10 @@
 		"en-US": "My Network",
 		"zh_CN": "我的網絡",
 		"ar-ma": "شبكتي"
+	},
+	"WELCOME_BACK": {
+		"en-US": "Welcome back",
+		"zh_CN": "欢迎回来",
+		"ar-ma": "مرحبا بك"
 	}
 }
