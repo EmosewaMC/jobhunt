@@ -1,6 +1,7 @@
 import { useSignal } from "@preact/signals";
 import { getUser } from "$utils/get_user.ts";
 import type { Player } from "gameData/playerStats.ts";
+import { text, translate, _translate } from "gameData/locale.ts";
 
 export default async function Home(req : Request) {
   const user = await getUser(req) as Player;

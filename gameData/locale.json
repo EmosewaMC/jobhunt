@@ -1,0 +1,8 @@
+{
+	"SupportedLanguages": ["en_US", "de_CN", "as_AB"],
+	"MY_NETWORK": {
+		"en-US": "My Network",
+		"zh_CN": "我的網絡",
+		"ar-ma": "شبكتي"
+	}
+}
