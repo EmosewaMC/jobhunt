@@ -26,10 +26,8 @@ export function _translate(programmerString: string, language: string) {
 /// or if the programmerString is not found
 export function translate(programmerString: string, request: Request) {
   let acceptLanguage = request.headers.get("accept-language");
-  let actLangAry = acceptLanguage?.split(",");
-
-  if (!actLangAry) return null;
-  if (actLangAry.length > 0) acceptLanguage = actLangAry[0];
+  if (!acceptLanguage) return null;
+  if (acceptLanguage.length > 0) acceptLanguage = acceptLanguage.substring(0, 2);
   if (!acceptLanguage) return null;
 
   return _translate(programmerString, acceptLanguage);
