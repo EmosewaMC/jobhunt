@@ -11,7 +11,7 @@ const locale = JSON.parse(text);
 /// @returns the translated string
 /// NOTE: Returns the programmerString if the user's language is not found
 /// or if the programmerString is not found
-export function _translate(programmerString: string, language: string) {
+export function language_translate(programmerString: string, language: string) {
   let toReturn = programmerString;
   if (locale[programmerString]) toReturn = locale[programmerString][language];
 
@@ -30,5 +30,5 @@ export function translate(programmerString: string, request: Request) {
   if (acceptLanguage.length > 0) acceptLanguage = acceptLanguage.substring(0, 2);
   if (!acceptLanguage) return null;
 
-  return _translate(programmerString, acceptLanguage);
+  return language_translate(programmerString, acceptLanguage);
 }

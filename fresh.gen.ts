@@ -11,7 +11,6 @@ import * as $api_auth_login from "./routes/api/auth/login.ts";
 import * as $api_auth_logout from "./routes/api/auth/logout.ts";
 import * as $api_data_network from "./routes/api/data/network.ts";
 import * as $api_data_player from "./routes/api/data/player.ts";
-import * as $api_joke from "./routes/api/joke.ts";
 import * as $greet_name_ from "./routes/greet/[name].tsx";
 import * as $index from "./routes/index.tsx";
 import * as $interview from "./routes/interview.tsx";
@@ -38,7 +37,6 @@ const manifest = {
     "./routes/api/auth/logout.ts": $api_auth_logout,
     "./routes/api/data/network.ts": $api_data_network,
     "./routes/api/data/player.ts": $api_data_player,
-    "./routes/api/joke.ts": $api_joke,
     "./routes/greet/[name].tsx": $greet_name_,
     "./routes/index.tsx": $index,
     "./routes/interview.tsx": $interview,

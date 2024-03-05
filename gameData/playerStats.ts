@@ -19,6 +19,7 @@ export interface Player {
     moves: PlayerMove[];
     unspentPoints: number;
     friendsList: string[];
+	lastLanguage: string;
 }
 
 export function initPlayer(googleId: string, googleName: string): Player {
@@ -36,5 +37,6 @@ export function initPlayer(googleId: string, googleName: string): Player {
         moves: [],
         unspentPoints: 10,
         friendsList: [],
+		lastLanguage: "en",
     };
 }

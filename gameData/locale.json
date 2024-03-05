@@ -24,5 +24,20 @@
 		"en": "Welcome to the Job Hunt",
 		"zh": "欢迎来到求职之旅",
 		"ar": "مرحبا بك في رحلة البحث عن وظيفة"
+	},
+	"INTERVIEW": {
+		"en": "Interview",
+		"zh": "面试",
+		"ar": "مقابلة"
+	},
+	"NO_PLAYER_DATA_FOUND": {
+		"en": "No player data found",
+		"zh": "未找到玩家数据",
+		"ar": "لم يتم العثور على بيانات اللاعب"
+	},
+	"UNALLOCATED_POINTS": {
+		"en": "Unallocated Points",
+		"zh": "未分配的PTS",
+		"ar": "PTS غير المخصصة"
 	}
 }

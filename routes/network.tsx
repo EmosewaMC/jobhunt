@@ -2,6 +2,7 @@ import { NetworkButton, NetworkProps, NetworkList} from "../islands/NetworkButto
 import { getUser } from "$utils/get_user.ts";
 import type { Player } from "gameData/playerStats.ts";
 import AsyncLayout from "../layouts/asyncLayout.tsx";
+import { translate } from "gameData/locale.ts";
 
 // import Form from "../islands/Form.tsx";
 
@@ -14,9 +15,9 @@ export default async function Home(req: Request) {
 	return (
 	  <div class="px-4 py-8 mx-auto bg-[#86efac]">
 		<div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
-		  <h1 class="text-4xl font-bold">Welcome to the Jobhunt</h1>
+		  <h1 class="text-4xl font-bold">{translate("WELCOME_TO_THE_JOBHUNT", req)}</h1>
 		  <a class="my-4 text-blue-500 underline" href="/api/auth/login">
-			Sign in to get started
+		  	{translate("SIGN_IN_TO_GET_STARTED", req)}
 		  </a>
 		</div>
 	  </div>
@@ -25,7 +26,7 @@ export default async function Home(req: Request) {
   return (
     <div class="px-4 py-8 mx-auto bg-[#86efac]">
       <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
-        <h1 class="text-4xl font-bold">My Network</h1>
+        <h1 class="text-4xl font-bold">{translate("MY_NETWORK", req)}</h1>
         <AsyncLayout player={player}>
           {({ player }) => (
             <div>

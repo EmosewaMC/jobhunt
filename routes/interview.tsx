@@ -1,6 +1,7 @@
 import P5Canvas from "../islands/P5Canvas.tsx";
 import { getUser } from "$utils/get_user.ts";
 import type { Player } from "gameData/playerStats.ts";
+import { translate } from "gameData/locale.ts";
 
 //NOTE: This route will not be available through the nav later once we setup reaching here from the map route
 function dispatchMove(moveNum: number) {
@@ -12,7 +13,7 @@ export default async function Home(req: Request) {
   return (
     <div class="px-4 py-8 mx-auto bg-[#86efac]">
       <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
-        <h1 class="text-4xl font-bold">Interview</h1>
+        <h1 class="text-4xl font-bold">{translate("INTERVIEW", req)}</h1>
         <P5Canvas isLoggedIn={user!==null} />
 
       </div>

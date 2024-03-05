@@ -2,6 +2,8 @@ import { Button } from "../components/Button.tsx";
 import { Player, PlayerMove, PlayerStats } from "gameData/playerStats.ts";
 import { Signal, useSignal } from "@preact/signals";
 import { Fragment } from "preact";
+import { language_translate } from "gameData/locale.ts";
+import { translate } from "gameData/locale.ts";
 
 interface MoveFormProps {
   index: number;
@@ -77,6 +79,7 @@ function MoveForm(
       </div>
     </Fragment>
   ));
+
   return (
     <div>
       <div class="text-2xl font-bold text-center">
@@ -173,7 +176,7 @@ export default function CreateMoveForms({ player }: CreateMoveFormsProps) {
   return (
     <Fragment>
       <form onSubmit={handleSubmit}>
-        <p>Unallocated Points: {unallocatedPoints.value}</p>
+        <p>{language_translate("UNALLOCATED_POINTS", player.lastLanguage)}: {unallocatedPoints.value}</p>
         {player.moves.map((move, index) => (
           <MoveForm
             index={index}
