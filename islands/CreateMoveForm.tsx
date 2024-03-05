@@ -176,7 +176,7 @@ export default function CreateMoveForms({ player }: CreateMoveFormsProps) {
   return (
     <Fragment>
       <form onSubmit={handleSubmit}>
-        <p>{language_translate("UNALLOCATED_POINTS", player.lastLanguage)}: {unallocatedPoints.value}</p>
+        <p>Unallocated Points: {unallocatedPoints.value}</p>
         {player.moves.map((move, index) => (
           <MoveForm
             index={index}
