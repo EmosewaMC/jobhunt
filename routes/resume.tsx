@@ -5,7 +5,7 @@ import { deno_kv } from "$utils/db.ts";
 import type { Player } from "gameData/playerStats.ts";
 import type { Handlers, PageProps } from "$fresh/server.ts";
 import { redirect } from "$utils/response.ts";
-import { language_translate } from "gameData/locale.ts";
+// import { language_translate } from "gameData/locale.ts";
 
 export const handler: Handlers<Player | null> = {
   async GET(req, ctx) {
@@ -33,14 +33,14 @@ export const handler: Handlers<Player | null> = {
 export default function ResumePage({ data }: PageProps<Player | null>) {
   if (!data) {
     // Handle the case where no data is returned (e.g., redirect or show a message)
-    return <div>{language_translate("NO_DATA", "en")}</div>;
+    return <div>No data.</div>;
   }
 
   // Use the data fetched in the handler
   return (
     <div class="px-4 py-8 mx-auto bg-[#86efac]">
       <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
-        <h1 class="text-4xl font-bold">{language_translate("INTERVIEW", data.lastLanguage)}</h1>
+        <h1 class="text-4xl font-bold">Interview</h1>
         <AsyncLayout player={data}>
           {({ player }) => (
             <div>
