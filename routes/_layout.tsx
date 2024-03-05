@@ -15,7 +15,7 @@ export default async function Layout(req: Request, ctx: FreshContext) {
         </meta>
       </Head>
       <div class="flex">
-        {user ? <NavLoggedIn req={req} /> : <Nav req={req}/>}
+        {user ? <NavLoggedIn /> : <Nav />}
         <div class="flex-1">
           <ctx.Component />
         </div>

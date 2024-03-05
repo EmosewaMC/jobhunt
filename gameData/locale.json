@@ -39,45 +39,5 @@
 		"en": "Unallocated Points",
 		"zh": "未分配的PTS",
 		"ar": "PTS غير المخصصة"
-	},
-	"WORLD_MAP": {
-		"en": "World Map",
-		"zh": "世界地图",
-		"ar": "خريطة العالم"
-	},
-	"LOGOUT": {
-		"en": "Logout",
-		"zh": "登出",
-		"ar": "تسجيل الخروج"
-	},
-	"TEMP_INTERVIEW": {
-		"en": "Temp Interview",
-		"zh": "临时面试",
-		"ar": "مقابلة مؤقتة"
-	},
-	"HOME": {
-		"en": "Home",
-		"zh": "首页",
-		"ar": "الصفحة الرئيسية"
-	},
-	"MAP": {
-		"en": "Map",
-		"zh": "地图",
-		"ar": "خريطة"
-	},
-	"RESUME": {
-		"en": "Resume",
-		"zh": "简历",
-		"ar": "استئناف"
-	},
-	"NETWORK": {
-		"en": "Network",
-		"zh": "网络",
-		"ar": "شبكة"
-	},
-	"LOGO": {
-		"en": "Logo",
-		"zh": "标志",
-		"ar": "شعار"
 	}
 }
