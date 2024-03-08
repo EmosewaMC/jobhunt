@@ -9,8 +9,10 @@ export const handler: Handlers = {
     async POST(request) {
         //@ts-ignore: I cast to Player, so I know it's a Player object
         const user = await getUser(request) as Player;
-        console.log("hitting the game route");
-        console.log('user level ', user.level);
+        const formData = await request.formData();
+        const stats = formData.get("interviewerStats");
+        //we could store the stats in the db here
+        console.log('stats ', stats);
         // Parse the request body as FormData
         return new Response(JSON.stringify({ message: "Move data stored successfully" }), {
             headers: {
