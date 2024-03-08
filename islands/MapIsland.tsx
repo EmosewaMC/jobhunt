@@ -2,7 +2,16 @@ import * as Leaflet from "https://esm.sh/v135/@types/leaflet@1.9.4/index.d.ts";
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { useContext, useEffect, useState } from "preact/hooks";
 import { ComponentChildren, createContext } from "preact";
+import { PlayerStats } from "gameData/playerStats.ts";
+import * as Interviews from "../gameData/interviewSettings.json" with {
+  type: "json",
+};
 
+interface InterviewData {
+  level: number;
+  prompts: Array<PlayerStats>;
+
+}
 // Create a context to hold Leaflet data/functions
 const LeafletContext = createContext<typeof Leaflet | null>(null);
 
@@ -39,38 +48,50 @@ function LeafletProvider(props: { children: ComponentChildren }) {
 // MapComponent utilizes Leaflet context for rendering the map
 function MapComponent() {
   const leaf = useContext(LeafletContext);
+  const interviewData = JSON.parse(JSON.stringify(Interviews.default));
   if (!leaf) return <div>Component placeholder</div>;
   useEffect(() => {
     const map = leaf.map("map").setView(leaf.latLng(0, 0), 2);
 
     // Define bounds for the image
     const southWest = leaf.latLng(-100, -400),
-    northEast = leaf.latLng(100, 400),
-    bounds = leaf.latLngBounds(southWest, northEast);
+      northEast = leaf.latLng(100, 400),
+      bounds = leaf.latLngBounds(southWest, northEast);
 
     // Add the image overlay
     // Replace 'YOUR_IMAGE_URL_HERE' with the URL of your image
-    leaf.imageOverlay('/temp_map.png', bounds).addTo(map);
+    leaf.imageOverlay("/temp_map.png", bounds).addTo(map);
     map.fitBounds(bounds);
     map.setMaxBounds(bounds);
+    const createMarker = () => {
+      console.log("Creating marker");
+      //generate random coordinates
+      const lat = Math.random() * 100 - 100;
+      const lng = Math.random() * 100 - 100;
+      const location = leaf.latLng(lat, lng);
+      const marker = leaf.marker(location).addTo(map);
+      marker.bindPopup("Click to proceed to interview.");
 
-    const location = leaf.latLng(-50, 100);
-    const marker = leaf.marker(location).addTo(map)
-    marker.bindPopup('Click to proceed to interview.')
+      // Redirect on click
+      marker.on("click", () => {
+        window.location.href = "/interview";
+      });
 
-   // Redirect on click
-    marker.on('click', () => {
-      window.location.href = '/interview';
-    });
+      marker.on("mouseover", function (e) {
+        marker.openPopup();
+      });
 
-    marker.on('mouseover', function (e) {
-      this.openPopup();
-    });
-  
-    // Optional: Close popup on mouse out
-    marker.on('mouseout', function (e) {
-      this.closePopup();
-    });
+      // Optional: Close popup on mouse out
+      marker.on("mouseout", function (e) {
+        marker.closePopup();
+      });
+    };
+
+    const currentLevelPrompts = interviewData.find((interview: InterviewData) => { return interview.level == 1 }).prompts;
+    console.log(currentLevelPrompts);
+    for(const prompt of currentLevelPrompts) {
+      createMarker();
+    }
   });
   return <div id="map" class="relative w-[80vw] h-[50vh]" />;
 }
