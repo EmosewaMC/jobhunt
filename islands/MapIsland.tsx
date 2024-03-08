@@ -10,7 +10,6 @@ import * as Interviews from "../gameData/interviewSettings.json" with {
 interface InterviewData {
   level: number;
   prompts: Array<PlayerStats>;
-
 }
 // Create a context to hold Leaflet data/functions
 const LeafletContext = createContext<typeof Leaflet | null>(null);
@@ -18,7 +17,7 @@ const LeafletContext = createContext<typeof Leaflet | null>(null);
 // LeafletProvider component manages Leaflet loading and context
 function LeafletProvider(props: { children: ComponentChildren }) {
   if (!IS_BROWSER) {
-    return <p>Leaflet must be loaded on the client. No children will render</p>;
+    return <></>;
   }
   const [value, setValue] = useState<typeof Leaflet | null>(null);
   return (
@@ -46,7 +45,22 @@ function LeafletProvider(props: { children: ComponentChildren }) {
 }
 
 // MapComponent utilizes Leaflet context for rendering the map
-function MapComponent() {
+interface MapComponentProps {
+  level: number;
+}
+
+const sendInterviewRequest = async (formData: FormData) => {
+  const response = await fetch("/api/data/game", {
+    method: "POST",
+    body: formData,
+  });
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  console.log("response on client", response);
+  return response;
+}
+function MapComponent(props: MapComponentProps) {
   const leaf = useContext(LeafletContext);
   const interviewData = JSON.parse(JSON.stringify(Interviews.default));
   if (!leaf) return <div>Component placeholder</div>;
@@ -63,8 +77,7 @@ function MapComponent() {
     leaf.imageOverlay("/temp_map.png", bounds).addTo(map);
     map.fitBounds(bounds);
     map.setMaxBounds(bounds);
-    const createMarker = () => {
-      console.log("Creating marker");
+    const createMarker = (interviewerStats: PlayerStats) => {
       //generate random coordinates
       const lat = Math.random() * 100 - 100;
       const lng = Math.random() * 100 - 100;
@@ -72,35 +85,49 @@ function MapComponent() {
       const marker = leaf.marker(location).addTo(map);
       marker.bindPopup("Click to proceed to interview.");
 
-      // Redirect on click
-      marker.on("click", () => {
-        window.location.href = "/interview";
-      });
-
+      
       marker.on("mouseover", function (e) {
         marker.openPopup();
       });
-
+      
       // Optional: Close popup on mouse out
       marker.on("mouseout", function (e) {
         marker.closePopup();
       });
+
+      // Redirect on click
+      marker.on("click", async () => {
+        //we need to send the post req to generate the interview instead. 
+        const formData = new FormData();
+        formData.append("interviewerStats", JSON.stringify(interviewerStats));
+         const response = await fetch("/api/data/game", {
+          method: "POST",
+          body: formData,
+        });
+        return response;
+
+      });
     };
 
-    const currentLevelPrompts = interviewData.find((interview: InterviewData) => { return interview.level == 1 }).prompts;
-    console.log(currentLevelPrompts);
-    for(const prompt of currentLevelPrompts) {
-      createMarker();
+    const currentLevelPrompts =
+      interviewData.find((interview: InterviewData) => {
+        return interview.level == props.level;
+      }).prompts;
+    for (const prompt of currentLevelPrompts) {
+      createMarker(prompt);
     }
   });
   return <div id="map" class="relative w-[80vw] h-[50vh]" />;
 }
 
 // MapIsland is the parent component integrating LeafletProvider and MapComponent
-export default function MapIsland() {
+interface MapIslandProps {
+  level: number;
+}
+export default function MapIsland(props: MapIslandProps) {
   return (
     <LeafletProvider>
-      <MapComponent />
+      <MapComponent level={props.level} />
     </LeafletProvider>
   );
 }

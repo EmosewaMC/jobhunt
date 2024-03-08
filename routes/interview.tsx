@@ -1,11 +1,9 @@
 import P5Canvas from "../islands/P5Canvas.tsx";
 import { getUser } from "$utils/get_user.ts";
 import type { Player } from "gameData/playerStats.ts";
+import { Handlers } from "$fresh/server.ts";
 
-//NOTE: This route will not be available through the nav later once we setup reaching here from the map route
-function dispatchMove(moveNum: number) {
-  globalThis.dispatchEvent(new CustomEvent("move" + moveNum));
-}
+
 export default async function Home(req: Request) {
   const user = await getUser(req) as Player;
   console.log(req);
