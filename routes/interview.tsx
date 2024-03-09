@@ -3,6 +3,7 @@ import { getUser } from "$utils/get_user.ts";
 import type { Player } from "gameData/playerStats.ts";
 import { Handlers } from "$fresh/server.ts";
 
+import { translate } from "gameData/locale.ts";
 
 export default async function Home(req: Request) {
   const user = await getUser(req) as Player;
@@ -10,7 +11,7 @@ export default async function Home(req: Request) {
   return (
     <div class="px-4 py-8 mx-auto bg-[#86efac]">
       <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
-        <h1 class="text-4xl font-bold">Interview</h1>
+        <h1 class="text-4xl font-bold">{translate("INTERVIEW", req)}</h1>
         <P5Canvas isLoggedIn={user!==null} />
 
       </div>

@@ -2,8 +2,11 @@
 // a function to translate a programmer side string to a
 // user side string
 
-export const text = await Deno.readTextFile("gameData/locale.json");
-const locale = JSON.parse(text);
+import * as Locale from "../gameData/locale.json" with {
+	type: "json",
+};
+
+const locale = JSON.parse(JSON.stringify(Locale.default))[0];
 
 /// Translate a programmer side string to a user side string
 /// @param programmerString - the string to translate

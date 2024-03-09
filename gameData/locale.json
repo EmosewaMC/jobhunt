@@ -1,83 +1,85 @@
-{
-	"SupportedLanguages": ["en", "zh", "ar"],
-	"MY_NETWORK": {
-		"en": "My Network",
-		"zh": "我的網絡",
-		"ar": "شبكتي"
-	},
-	"WELCOME_BACK": {
-		"en": "Welcome back",
-		"zh": "欢迎回来",
-		"ar": "مرحبا بك"
-	},
-	"RETURN_TO_WORLD_MAP": {
-		"en": "Return to World Map",
-		"zh": "返回世界地图",
-		"ar": "العودة إلى الخريطة العالمية"
-	},
-	"SIGN_IN_TO_GET_STARTED": {
-		"en": "Sign in to get started",
-		"zh": "登录开始",
-		"ar": "تسجيل الدخول للبدء"
-	},
-	"WELCOME_TO_THE_JOBHUNT": {
-		"en": "Welcome to the Job Hunt",
-		"zh": "欢迎来到求职之旅",
-		"ar": "مرحبا بك في رحلة البحث عن وظيفة"
-	},
-	"INTERVIEW": {
-		"en": "Interview",
-		"zh": "面试",
-		"ar": "مقابلة"
-	},
-	"NO_PLAYER_DATA_FOUND": {
-		"en": "No player data found",
-		"zh": "未找到玩家数据",
-		"ar": "لم يتم العثور على بيانات اللاعب"
-	},
-	"UNALLOCATED_POINTS": {
-		"en": "Unallocated Points",
-		"zh": "未分配的PTS",
-		"ar": "PTS غير المخصصة"
-	},
-	"WORLD_MAP": {
-		"en": "World Map",
-		"zh": "世界地图",
-		"ar": "خريطة العالم"
-	},
-	"LOGOUT": {
-		"en": "Logout",
-		"zh": "登出",
-		"ar": "تسجيل الخروج"
-	},
-	"TEMP_INTERVIEW": {
-		"en": "Temp Interview",
-		"zh": "临时面试",
-		"ar": "مقابلة مؤقتة"
-	},
-	"HOME": {
-		"en": "Home",
-		"zh": "首页",
-		"ar": "الصفحة الرئيسية"
-	},
-	"MAP": {
-		"en": "Map",
-		"zh": "地图",
-		"ar": "خريطة"
-	},
-	"RESUME": {
-		"en": "Resume",
-		"zh": "简历",
-		"ar": "استئناف"
-	},
-	"NETWORK": {
-		"en": "Network",
-		"zh": "网络",
-		"ar": "شبكة"
-	},
-	"LOGO": {
-		"en": "Logo",
-		"zh": "标志",
-		"ar": "شعار"
+[
+	{
+		"SupportedLanguages": ["en", "zh", "ar"],
+		"MY_NETWORK": {
+			"en": "My Network",
+			"zh": "我的網絡",
+			"ar": "شبكتي"
+		},
+		"WELCOME_BACK": {
+			"en": "Welcome back",
+			"zh": "欢迎回来",
+			"ar": "مرحبا بك"
+		},
+		"RETURN_TO_WORLD_MAP": {
+			"en": "Return to World Map",
+			"zh": "返回世界地图",
+			"ar": "العودة إلى الخريطة العالمية"
+		},
+		"SIGN_IN_TO_GET_STARTED": {
+			"en": "Sign in to get started",
+			"zh": "登录开始",
+			"ar": "تسجيل الدخول للبدء"
+		},
+		"WELCOME_TO_THE_JOBHUNT": {
+			"en": "Welcome to the Job Hunt",
+			"zh": "欢迎来到求职之旅",
+			"ar": "مرحبا بك في رحلة البحث عن وظيفة"
+		},
+		"INTERVIEW": {
+			"en": "Interview",
+			"zh": "面试",
+			"ar": "مقابلة"
+		},
+		"NO_PLAYER_DATA_FOUND": {
+			"en": "No player data found",
+			"zh": "未找到玩家数据",
+			"ar": "لم يتم العثور على بيانات اللاعب"
+		},
+		"UNALLOCATED_POINTS": {
+			"en": "Unallocated Points",
+			"zh": "未分配的PTS",
+			"ar": "PTS غير المخصصة"
+		},
+		"WORLD_MAP": {
+			"en": "World Map",
+			"zh": "世界地图",
+			"ar": "خريطة العالم"
+		},
+		"LOGOUT": {
+			"en": "Logout",
+			"zh": "登出",
+			"ar": "تسجيل الخروج"
+		},
+		"TEMP_INTERVIEW": {
+			"en": "Temp Interview",
+			"zh": "临时面试",
+			"ar": "مقابلة مؤقتة"
+		},
+		"HOME": {
+			"en": "Home",
+			"zh": "首页",
+			"ar": "الصفحة الرئيسية"
+		},
+		"MAP": {
+			"en": "Map",
+			"zh": "地图",
+			"ar": "خريطة"
+		},
+		"RESUME": {
+			"en": "Resume",
+			"zh": "简历",
+			"ar": "استئناف"
+		},
+		"NETWORK": {
+			"en": "Network",
+			"zh": "网络",
+			"ar": "شبكة"
+		},
+		"LOGO": {
+			"en": "Logo",
+			"zh": "标志",
+			"ar": "شعار"
+		}
 	}
-}
+]

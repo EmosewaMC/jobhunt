@@ -2,8 +2,8 @@ import { Button } from "../components/Button.tsx";
 import { Player, PlayerMove, PlayerStats } from "gameData/playerStats.ts";
 import { Signal, useSignal } from "@preact/signals";
 import { Fragment } from "preact";
-// import { language_translate } from "gameData/locale.ts";
-// import { translate } from "gameData/locale.ts";
+import { language_translate } from "gameData/locale.ts";
+import { translate } from "gameData/locale.ts";
 
 interface MoveFormProps {
   index: number;
