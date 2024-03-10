@@ -1,17 +1,24 @@
 // deno-lint-ignore-file
 import { useEffect } from "preact/hooks";
 import { Button } from "../components/Button.tsx";
-import { isWindowsDeviceRoot } from "$std/path/windows/_util.ts";
 import { language_translate } from "gameData/locale.ts";
-import { Player } from "gameData/playerStats.ts";
+import { Player, PlayerMove, PlayerStats} from "gameData/playerStats.ts";
 
 //NOTE: This route will not be available through the nav later once we setup reaching here from the map route
 function dispatchMove(moveNum: number) {
   globalThis.dispatchEvent(new CustomEvent("move" + moveNum));
 }
-export default function P5Canvas(user: {user: Player}) {
-  const backPathname: string = user.user !== null ? "/worldMap" : "/";
+interface P5CanvasProps {
+  user: Player;
+  playerMoves: PlayerMove[];
+  interviewData: PlayerStats;
+}
+export default function P5Canvas({ user, interviewData, playerMoves }: P5CanvasProps) {
+  const backPathname: string = user !== null ? "/worldMap" : "/";
   const retryPathname: string = "/interview";
+  console.log("interviewData", interviewData);
+  console.log("playerMoves", playerMoves);
+  
   useEffect(() => {
     // Dynamically load p5.js
     const script = document.createElement("script");
@@ -99,12 +106,12 @@ export default function P5Canvas(user: {user: Player}) {
   return (
     <>
       <dialog id="winDialog">
-        <h2>{language_translate("YOU_WIN", user.user.lastLanguage)}</h2>
+        <h2>{language_translate("YOU_WIN", user.lastLanguage)}</h2>
         <button onClick={ () => window.location.pathname = backPathname}>Back to Map</button>
       </dialog>
 
       <dialog id="loseDialog">
-        <h2>{language_translate("YOU_LOSE", user.user.lastLanguage)}</h2>
+        <h2>{language_translate("YOU_LOSE", user.lastLanguage)}</h2>
         <button onClick={() => window.location.pathname = retryPathname}>Retry?</button>
         <button onClick={() => window.location.pathname = backPathname}>Back to Map</button>
       </dialog>

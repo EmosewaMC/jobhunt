@@ -34,6 +34,7 @@ export const handler: Handlers = {
 		await loginCallback;
 	} catch (e) {
 		// Just ignore the error
+    console.error(e);
 		return redirect("/");
 	}
     const { response,sessionId, tokens } = await loginCallback;

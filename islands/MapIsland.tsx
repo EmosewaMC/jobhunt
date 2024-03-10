@@ -3,9 +3,12 @@ import { IS_BROWSER } from "$fresh/runtime.ts";
 import { useContext, useEffect, useState } from "preact/hooks";
 import { ComponentChildren, createContext } from "preact";
 import { PlayerStats } from "gameData/playerStats.ts";
+import { redirect } from "$utils/response.ts";
 import * as Interviews from "../gameData/interviewSettings.json" with {
   type: "json",
 };
+import re from "https://esm.sh/v135/preact-render-to-string@6.3.1/X-ZS8q/denonext/preact-render-to-string.mjs";
+
 
 interface InterviewData {
   level: number;
@@ -104,7 +107,13 @@ function MapComponent(props: MapComponentProps) {
           method: "POST",
           body: formData,
         });
-        return response;
+
+        //cache the result in the db and then redirect to the interview page
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        globalThis.location.href = "/interview"; 
 
       });
     };

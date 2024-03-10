@@ -1,13 +1,13 @@
 import { Handlers } from "$fresh/server.ts";
-import { deno_kv } from "$utils/db.ts"; // Assuming this is your custom module for database interactions
-import {Player } from "gameData/playerStats.ts";
+import { setPlayer } from "$utils/db.ts"; // Assuming this is your custom module for database interactions
+import { Player } from "gameData/playerStats.ts";
 
 
 export const handler: Handlers = {
   async POST(request) {
     // Parse the request body as FormData
     const formData = await request.formData();
-    
+
     try {
       const playerValue = formData.get("player") as FormDataEntryValue;
       if (playerValue === null) {
@@ -15,10 +15,12 @@ export const handler: Handlers = {
       }
       //@ts-ignore: I cast to Player, so I know it's a Player object
       const playerObj = JSON.parse(playerValue) as Player;
-	  if (!request.headers.get("accept-language") || request.headers.get("accept-language")?.length === 0) playerObj.lastLanguage = "en";
-	  else playerObj.lastLanguage = request.headers.get("accept-language")?.substring(0, 2) || "en";
+
+      if (!request.headers.get("accept-language") || request.headers.get("accept-language")?.length === 0) playerObj.lastLanguage = "en";
+      else playerObj.lastLanguage = request.headers.get("accept-language")?.substring(0, 2) || "en";
+
       console.log("Writing Player Object to db:", playerObj);
-      deno_kv.set(["player", playerObj.googleId], playerObj);
+      await setPlayer(playerObj.googleId, playerObj);
       return new Response(JSON.stringify({ message: "Move data stored successfully" }), {
         headers: {
           location: "/resume",
