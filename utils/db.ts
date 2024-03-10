@@ -1,3 +1,4 @@
+import { Player, PlayerStats, PlayerMove} from "gameData/playerStats.ts";
 //ref: https://docs.deno.com/deploy/kv/manual
 export const deno_kv = await Deno.openKv();
 export async function isNewPlayer(googleID: string) {
@@ -6,7 +7,38 @@ export async function isNewPlayer(googleID: string) {
   return player.value === null;
 }
 
-export async function fetchPlayer(googleID: string) {
+export async function getPlayer(googleID: string) {
   const player = await deno_kv.get(["player",googleID]);
   return player.value;
 }
+
+export async function setPlayer(googleID: string, player: Player) {
+  const key = ["player", googleID];
+  const value = JSON.stringify(player);
+  const res = await deno_kv.set(key, value);
+  return res;
+}
+
+export async function setInterview(googleID: string, interview: PlayerStats) {
+  const key = ["interview", googleID];
+  const value = JSON.stringify(interview);
+  const res = await deno_kv.set(key, value);
+  return res;
+
+}
+
+export async function getInterview(googleID: string): Promise<PlayerStats>{
+  const interview = await deno_kv.get(["interview", googleID]);
+  return interview.value as PlayerStats;
+}
+interface DenoKVValue {
+  // deno-lint-ignore no-explicit-any
+  value: any;
+  expiration?: number;
+}
+export async function getPlayerMoves(googleID: string): Promise<PlayerMove[]>{
+  const player = await deno_kv.get(["player",googleID]) as DenoKVValue;
+  const moves = player.value.moves;
+  return moves;
+}
+

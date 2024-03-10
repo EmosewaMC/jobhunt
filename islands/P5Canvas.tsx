@@ -1,23 +1,25 @@
 // deno-lint-ignore-file
 import { useEffect } from "preact/hooks";
 import { Button } from "../components/Button.tsx";
-import { isWindowsDeviceRoot } from "$std/path/windows/_util.ts";
 import { language_translate } from "gameData/locale.ts";
-import { Player } from "gameData/playerStats.ts";
+import { Player, PlayerMove, PlayerStats} from "gameData/playerStats.ts";
 
 //NOTE: This route will not be available through the nav later once we setup reaching here from the map route
 function dispatchMove(moveNum: number) {
   globalThis.dispatchEvent(new CustomEvent("move" + moveNum));
 }
-
-export interface P5CanvasProps {
-	user: Player
-	language: string
+interface P5CanvasProps {
+  user: Player;
+  playerMoves: PlayerMove[];
+  interviewData: PlayerStats;
+  language: string
 }
-
-export default function P5Canvas(user: P5CanvasProps) {
-  const backPathname: string = user.user !== null ? "/worldMap" : "/";
+export default function P5Canvas({ user, interviewData, playerMoves, language }: P5CanvasProps) {
+  const backPathname: string = user !== null ? "/worldMap" : "/";
   const retryPathname: string = "/interview";
+  console.log("interviewData", interviewData);
+  console.log("playerMoves", playerMoves);
+  
   useEffect(() => {
     // Dynamically load p5.js
     const script = document.createElement("script");
@@ -34,7 +36,7 @@ export default function P5Canvas(user: P5CanvasProps) {
           p.createCanvas(bgImg.width, bgImg.height).parent("p5-canvas");
           p.background(bgImg);
           p.textSize(16)
-          p.text(language_translate("PERSUASION_METER", user.language), p.width * 0.2, p.height * 0.85)
+          p.text(language_translate("PERSUASION_METER", language), p.width * 0.2, p.height * 0.85)
         };
 
         p.draw = function () {
@@ -105,14 +107,14 @@ export default function P5Canvas(user: P5CanvasProps) {
   return (
     <>
       <dialog id="winDialog">
-        <h2>{language_translate("YOU_WIN", user.language)}</h2>
-        <button onClick={ () => window.location.pathname = backPathname}>{language_translate("BACK_TO_MAP", user.language)}</button>
+        <h2>{language_translate("YOU_WIN", language)}</h2>
+        <button onClick={ () => window.location.pathname = backPathname}>{language_translate("BACK_TO_MAP", language)}</button>
       </dialog>
 
       <dialog id="loseDialog">
-        <h2>{language_translate("YOU_LOSE", user.language)}</h2>
-        <button onClick={() => window.location.pathname = retryPathname}>{language_translate("RETRY?", user.language)}</button>
-        <button onClick={() => window.location.pathname = backPathname}>{language_translate("BACK_TO_MAP", user.language)}</button>
+        <h2>{language_translate("YOU_LOSE", language)}</h2>
+        <button onClick={() => window.location.pathname = retryPathname}>{language_translate("RETRY?", language)}</button>
+        <button onClick={() => window.location.pathname = backPathname}>{language_translate("BACK_TO_MAP", language)}</button>
       </dialog>
       <div>
         <div id="p5-canvas"></div>
