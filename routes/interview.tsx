@@ -12,7 +12,7 @@ export default async function Home(req: Request) {
     <div class="px-4 py-8 mx-auto bg-[#86efac]">
       <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
         <h1 class="text-4xl font-bold">{translate("INTERVIEW", req)}</h1>
-        <P5Canvas isLoggedIn={user!==null} />
+        <P5Canvas user={user} />
 
       </div>
     </div>
