@@ -15,9 +15,6 @@ export default function Nav(ctx: NavCtx) {
         </div>
         <nav class="flex flex-col flex-1 px-4 py-8">
           <a href="/" class="py-2 hover:bg-gray-700 rounded">{translate("HOME", ctx.req)}</a>
-          <a href="/interview" class="py-2 hover:bg-gray-700 rounded">
-            {translate("TEMP_INTERVIEW", ctx.req)}
-          </a>
           <a
             href="/api/auth/login"
             class="px-4 py-2 border rounded flex gap-4 hover:bg-gray-200 transition-all"
