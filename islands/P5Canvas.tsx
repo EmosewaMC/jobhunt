@@ -9,7 +9,13 @@ import { Player } from "gameData/playerStats.ts";
 function dispatchMove(moveNum: number) {
   globalThis.dispatchEvent(new CustomEvent("move" + moveNum));
 }
-export default function P5Canvas(user: {user: Player}) {
+
+export interface P5CanvasProps {
+	user: Player
+	language: string
+}
+
+export default function P5Canvas(user: P5CanvasProps) {
   const backPathname: string = user.user !== null ? "/worldMap" : "/";
   const retryPathname: string = "/interview";
   useEffect(() => {
@@ -28,7 +34,7 @@ export default function P5Canvas(user: {user: Player}) {
           p.createCanvas(bgImg.width, bgImg.height).parent("p5-canvas");
           p.background(bgImg);
           p.textSize(16)
-          p.text('persuasion meter', p.width * 0.2, p.height * 0.85)
+          p.text(language_translate("PERSUASION_METER", user.language), p.width * 0.2, p.height * 0.85)
         };
 
         p.draw = function () {
@@ -99,14 +105,14 @@ export default function P5Canvas(user: {user: Player}) {
   return (
     <>
       <dialog id="winDialog">
-        <h2>{language_translate("YOU_WIN", user.user.lastLanguage)}</h2>
-        <button onClick={ () => window.location.pathname = backPathname}>Back to Map</button>
+        <h2>{language_translate("YOU_WIN", user.language)}</h2>
+        <button onClick={ () => window.location.pathname = backPathname}>{language_translate("BACK_TO_MAP", user.language)}</button>
       </dialog>
 
       <dialog id="loseDialog">
-        <h2>{language_translate("YOU_LOSE", user.user.lastLanguage)}</h2>
-        <button onClick={() => window.location.pathname = retryPathname}>Retry?</button>
-        <button onClick={() => window.location.pathname = backPathname}>Back to Map</button>
+        <h2>{language_translate("YOU_LOSE", user.language)}</h2>
+        <button onClick={() => window.location.pathname = retryPathname}>{language_translate("RETRY?", user.language)}</button>
+        <button onClick={() => window.location.pathname = backPathname}>{language_translate("BACK_TO_MAP", user.language)}</button>
       </dialog>
       <div>
         <div id="p5-canvas"></div>

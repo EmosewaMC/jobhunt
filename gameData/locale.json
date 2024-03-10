@@ -100,6 +100,66 @@
 			"en": "Hello",
 			"zh": "你好",
 			"ar": "مرحبا"
+		},
+		"MOVE_NAME": {
+			"en": "Move Name",
+			"zh": "移动名称",
+			"ar": "اسم الحركة"
+		},
+		"CHARISMA": {
+			"en": "Charisma",
+			"zh": "魅力",
+			"ar": "جاذبية"
+		},
+		"MOTIVATION": {
+			"en": "Motivation",
+			"zh": "动力",
+			"ar": "حافز"
+		},
+		"TECHNICALSKILLS": {
+			"en": "Technical Skills",
+			"zh": "技术技能",
+			"ar": "المهارات التقنية"
+		},
+		"LIKABILITY": {
+			"en": "Likability",
+			"zh": "可爱",
+			"ar": "التعلق"
+		},
+		"PLAYER_NAME": {
+			"en": "Player Name",
+			"zh": "玩家名称",
+			"ar": "اسم اللاعب"
+		},
+		"ADD_CONNECTION": {
+			"en": "Add Connection",
+			"zh": "添加联系人",
+			"ar": "إضافة اتصال"
+		},
+		"PERSUASION_METER": {
+			"en": "Persuasion Meter",
+			"zh": "说服力计",
+			"ar": "مقياس الإقناع"
+		},
+		"BACK_TO_MAP": {
+			"en": "Back to Map",
+			"zh": "返回地图",
+			"ar": "العودة إلى الخريطة"
+		},
+		"RETRY?" : {
+			"en": "Retry?",
+			"zh": "重试？",
+			"ar": "أعد المحاولة؟"
+		},
+		"CLICK_TO_PROCEED_TO_INTERVIEW": {
+			"en": "Click to proceed to interview",
+			"zh": "点击继续面试",
+			"ar": "انقر للمتابعة إلى المقابلة"
+		},
+		"SUBMIT": {
+			"en": "Submit",
+			"zh": "提交",
+			"ar": "إرسال"
 		}
 	}
 ]

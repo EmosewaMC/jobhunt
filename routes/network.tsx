@@ -31,10 +31,7 @@ export default async function Home(req: Request) {
           {({ player }) => (
             <div>
 		          <NetworkList player={player}/>
-                  <p>
-                      This is where we will have the network/friend invite view.
-                  </p>
-		          <NetworkButton/>
+		          <NetworkButton player={player}/>
             </div>
           )}
         </AsyncLayout>

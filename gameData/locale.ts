@@ -21,6 +21,16 @@ export function language_translate(programmerString: string, language: string) {
   return toReturn;
 }
 
+export function get_language_from_request(request: Request) {
+  let acceptLanguage = request.headers.get("accept-language");
+  if (!acceptLanguage) return "en";
+  if (acceptLanguage.length > 0) acceptLanguage = acceptLanguage.substring(0, 2);
+  if (!acceptLanguage) return "en";
+
+  return acceptLanguage;
+
+}
+
 /// Translate a programmer side string to a user side string
 /// @param programmerString - the string to translate
 /// @param request - the request object to get the user's language

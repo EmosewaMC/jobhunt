@@ -10,10 +10,11 @@ interface MoveFormProps {
   move: PlayerMove | null; // null indicates a new move form
   onPointsChange: (delta: number) => void; // Function to handle point allocation changes
   unallocatedPoints: number;
+  player: Player;
 }
 
 function MoveForm(
-  { index, move, onPointsChange, unallocatedPoints }: MoveFormProps,
+  { index, move, onPointsChange, unallocatedPoints, player }: MoveFormProps,
 ) {
   const statsSignals = Object.entries(
     move
@@ -48,7 +49,7 @@ function MoveForm(
       {/* <div class="flex gap-8 py-6 items-center justify-between"> */}
       <div class="grid-cols-2">
         <label class="font-bold" for={`${move?.move}-${key}`}>
-          {key.charAt(0).toUpperCase() + key.slice(1)}
+          {language_translate(key.toUpperCase(), player.lastLanguage)}
         </label>
         <div class="flex  items-center justify-between">
           <Button
@@ -83,7 +84,7 @@ function MoveForm(
   return (
     <div>
       <div class="text-2xl font-bold text-center">
-        <label for="move-name">Move Name</label>
+        <label for="move-name">{language_translate("MOVE_NAME", player.lastLanguage)}</label>
         {/* if we have a move name, we want to just return an unmodifiable <input> */}
         <input
           id={`move-name-${index}`}
@@ -184,6 +185,7 @@ export default function CreateMoveForms({ player }: CreateMoveFormsProps) {
             move={move}
             onPointsChange={handlePointsChange}
             unallocatedPoints={unallocatedPoints.value}
+			player={player}
           />
         ))}
         {canMakeNewMove
@@ -202,10 +204,11 @@ export default function CreateMoveForms({ player }: CreateMoveFormsProps) {
               }}
               onPointsChange={handlePointsChange}
               unallocatedPoints={unallocatedPoints.value}
+			  player={player}
             />
           )
           : null}
-        <Button type="submit">Submit</Button>
+        <Button type="submit">{language_translate("SUBMIT", player.lastLanguage)}</Button>
       </form>
     </Fragment>
   );

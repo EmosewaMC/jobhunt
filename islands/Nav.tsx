@@ -14,7 +14,7 @@ export default function Nav(ctx: NavCtx) {
           <a href="/" class="py-2 hover:bg-gray-700 rounded">{translate("LOGO", ctx.req)}</a>
         </div>
         <nav class="flex flex-col flex-1 px-4 py-8">
-          <a href="/" class="py-2 hover:bg-gray-700 rounded">Home</a>
+          <a href="/" class="py-2 hover:bg-gray-700 rounded">{translate("HOME", ctx.req)}</a>
           <a href="/interview" class="py-2 hover:bg-gray-700 rounded">
             {translate("TEMP_INTERVIEW", ctx.req)}
           </a>

@@ -7,12 +7,17 @@ import Input from "../components/Input.tsx";
 import type { Player } from "gameData/playerStats.ts";
 import { initPlayer } from "gameData/playerStats.ts";
 import { redirect } from "$utils/response.ts";
+import { language_translate } from "gameData/locale.ts";
 
 export interface NetworkProps {
 	playerData: Array<string>;
 }
 
-export function NetworkButton() {
+export interface NetworkButtonProps {
+	player: Player;
+}
+
+export function NetworkButton(player: NetworkButtonProps) {
   const handleSubmit = async (e: Event) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
@@ -45,8 +50,8 @@ export function NetworkButton() {
   return (
 	<form name="AddConnectionForm" onSubmit={handleSubmit}>
     	<div class="flex gap-8 py-6">
-		    <Input placeholder="Player name" name="connection_name"/>
-    	  <Button onClick={() => console.log("Add")} type="submit">Add Connection</Button>
+		    <Input placeholder={language_translate("PLAYER_NAME", player.player.lastLanguage)} name="connection_name"/>
+    	  <Button onClick={() => console.log("Add")} type="submit">{language_translate("ADD_CONNECTION", player.player.lastLanguage)}</Button>
     	</div>
 	</form>
   );

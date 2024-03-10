@@ -6,6 +6,8 @@ import { PlayerStats } from "gameData/playerStats.ts";
 import * as Interviews from "../gameData/interviewSettings.json" with {
   type: "json",
 };
+import { Player } from "gameData/playerStats.ts";
+import {language_translate} from "gameData/locale.ts";
 
 interface InterviewData {
   level: number;
@@ -47,6 +49,7 @@ function LeafletProvider(props: { children: ComponentChildren }) {
 // MapComponent utilizes Leaflet context for rendering the map
 interface MapComponentProps {
   level: number;
+  player: Player;
 }
 
 const sendInterviewRequest = async (formData: FormData) => {
@@ -83,7 +86,7 @@ function MapComponent(props: MapComponentProps) {
       const lng = Math.random() * 100 - 100;
       const location = leaf.latLng(lat, lng);
       const marker = leaf.marker(location).addTo(map);
-      marker.bindPopup("Click to proceed to interview.");
+      marker.bindPopup(language_translate("CLICK_TO_PROCEED_TO_INTERVIEW", props.player.lastLanguage));
 
       
       marker.on("mouseover", function (e) {
@@ -123,11 +126,12 @@ function MapComponent(props: MapComponentProps) {
 // MapIsland is the parent component integrating LeafletProvider and MapComponent
 interface MapIslandProps {
   level: number;
+  player: Player;
 }
 export default function MapIsland(props: MapIslandProps) {
   return (
     <LeafletProvider>
-      <MapComponent level={props.level} />
+      <MapComponent level={props.level} player={props.player} />
     </LeafletProvider>
   );
 }
