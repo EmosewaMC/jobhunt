@@ -27,9 +27,15 @@ export async function setInterview(googleID: string, interview: PlayerStats) {
 
 }
 
-export async function getInterview(googleID: string): Promise<PlayerStats>{
+export async function getInterview(googleID: string): Promise<PlayerStats | null> {
   const interview = await deno_kv.get(["interview", googleID]);
-  return interview.value as PlayerStats;
+  if (interview.value) {
+    const parsedValue = JSON.parse(interview.value as string);
+    console.log("getInterview", parsedValue);
+    return parsedValue as PlayerStats;
+  } else {
+    return null;
+  }
 }
 interface DenoKVValue {
   // deno-lint-ignore no-explicit-any

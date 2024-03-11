@@ -1,15 +1,13 @@
-import * as Leaflet from "https://esm.sh/v135/@types/leaflet@1.9.4/index.d.ts";
+import * as Leaflet from "leaflet"; 
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { useContext, useEffect, useState } from "preact/hooks";
 import { ComponentChildren, createContext } from "preact";
 import { PlayerStats } from "gameData/playerStats.ts";
-import { redirect } from "$utils/response.ts";
+import { Player } from "gameData/playerStats.ts";
+import {language_translate} from "gameData/locale.ts";
 import * as Interviews from "../gameData/interviewSettings.json" with {
   type: "json",
 };
-import { Player } from "gameData/playerStats.ts";
-import {language_translate} from "gameData/locale.ts";
-import re from "https://esm.sh/v135/preact-render-to-string@6.3.1/X-ZS8q/denonext/preact-render-to-string.mjs";
 
 
 interface InterviewData {

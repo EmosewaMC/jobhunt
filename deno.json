@@ -37,8 +37,8 @@
     "$utils/": "./utils/",
     "deno_kv_oauth": "https://deno.land/x/deno_kv_oauth@v0.10.0/mod.ts",
     "icons/": "https://deno.land/x/tabler_icons_tsx@0.0.6/tsx/",
+    "leaflet": "https://esm.sh/v135/@types/leaflet@1.9.4/index.d.ts",
     "gameData/": "./gameData/"
-    
   },
   "compilerOptions": {
     "jsx": "react-jsx",

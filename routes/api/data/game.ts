@@ -1,7 +1,7 @@
 import { Handlers } from "$fresh/server.ts";
 import { setInterview } from "$utils/db.ts"; // Assuming this is your custom module for database interactions
 import { getUser } from "$utils/get_user.ts";
-import { Player} from "gameData/playerStats.ts";
+import { Player, PlayerStats} from "gameData/playerStats.ts";
 
 
 export const handler: Handlers = {
@@ -12,7 +12,7 @@ export const handler: Handlers = {
         const interviewerStats = formData.get('interviewerStats');
 
         if (interviewerStats) {
-            const parsedInterviewerStats = JSON.parse(interviewerStats as string);
+            const parsedInterviewerStats = JSON.parse(interviewerStats as string) as PlayerStats;
             const res = await setInterview(user.googleId, parsedInterviewerStats);
             if (!res) {
                 return new Response("", { status: 400 });

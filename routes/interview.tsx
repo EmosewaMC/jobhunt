@@ -1,16 +1,8 @@
 import P5Canvas from "../islands/P5Canvas.tsx";
 import { getUser } from "$utils/get_user.ts";
-import { Handlers } from "$fresh/server.ts";
-
 import type { Player, PlayerMove, PlayerStats} from "gameData/playerStats.ts";
 import { getInterview, getPlayerMoves } from "../utils/db.ts";
 import { translate, get_language_from_request } from "gameData/locale.ts";
-
-interface P5CanvasProps {
-  user: { user: Player };
-  playerMoves: PlayerMove[];
-  interviewData: PlayerStats;
-}
 
 export default async function Home(req: Request) {
   const user = await getUser(req) as Player;
@@ -27,10 +19,8 @@ export default async function Home(req: Request) {
 	);
   }
 
-  const interviewData = await getInterview(user.googleId);
-  const playerMoves = await getPlayerMoves(user.googleId);
-  console.log("interviewData", interviewData);
-  console.log("playerMoves", playerMoves);
+  const interviewData = await getInterview(user.googleId) as PlayerStats;
+  const playerMoves = await getPlayerMoves(user.googleId) as PlayerMove[];
   
   return (
     <div class="px-4 py-8 mx-auto bg-[#86efac]">

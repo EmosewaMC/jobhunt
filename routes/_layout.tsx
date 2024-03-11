@@ -1,4 +1,3 @@
-import { PageProps } from "$fresh/server.ts";
 import Nav from "../islands/Nav.tsx";
 import NavLoggedIn from "../islands/NavLoggedIn.tsx"; 
 import { Head } from "https://deno.land/x/fresh@1.6.3/runtime.ts";
