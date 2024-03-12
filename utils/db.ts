@@ -14,15 +14,13 @@ export async function getPlayer(googleID: string) {
 
 export async function setPlayer(googleID: string, player: Player) {
   const key = ["player", googleID];
-  const value = JSON.stringify(player);
-  const res = await deno_kv.set(key, value);
+  const res = await deno_kv.set(key, player);
   return res;
 }
 
 export async function setInterview(googleID: string, interview: PlayerStats) {
   const key = ["interview", googleID];
-  const value = JSON.stringify(interview);
-  const res = await deno_kv.set(key, value);
+  const res = await deno_kv.set(key, interview);
   return res;
 
 }
@@ -30,21 +28,14 @@ export async function setInterview(googleID: string, interview: PlayerStats) {
 export async function getInterview(googleID: string): Promise<PlayerStats | null> {
   const interview = await deno_kv.get(["interview", googleID]);
   if (interview.value) {
-    const parsedValue = JSON.parse(interview.value as string);
-    console.log("getInterview", parsedValue);
-    return parsedValue as PlayerStats;
+    return interview.value as PlayerStats;
   } else {
     return null;
   }
 }
-interface DenoKVValue {
-  // deno-lint-ignore no-explicit-any
-  value: any;
-  expiration?: number;
-}
 export async function getPlayerMoves(googleID: string): Promise<PlayerMove[]>{
-  const player = await deno_kv.get(["player",googleID]) as DenoKVValue;
-  const moves = player.value.moves;
+  const player = await deno_kv.get(["player",googleID]);
+  const moves = (player.value as Player).moves;
   return moves;
 }
 
