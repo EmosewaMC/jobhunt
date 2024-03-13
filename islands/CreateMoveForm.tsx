@@ -116,7 +116,6 @@ export default function CreateMoveForms({ player }: CreateMoveFormsProps) {
   const handleSubmit = async (e: Event) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
-
     const moves: PlayerMove[] = [];
 
     // Parse the FormData entries
@@ -125,9 +124,7 @@ export default function CreateMoveForms({ player }: CreateMoveFormsProps) {
       if (keyMatch) {
         const [_, indexStr, attribute] = keyMatch;
         const index = parseInt(indexStr, 10);
-
         moves[index] = moves[index] || { move: "", pointsAllocated: {} };
-
         if (attribute === "move") {
           // @ts-ignore: FormDataEntryValue is a string
           moves[index].move = value;
@@ -145,10 +142,8 @@ export default function CreateMoveForms({ player }: CreateMoveFormsProps) {
       unspentPoints: unallocatedPoints.value,
     };
 
-    console.log("Updated Player:", updatedPlayer);
     const fd = new FormData();
     fd.append("player", JSON.stringify(updatedPlayer));
-    console.log("Form Data:", fd);
 
     try {
       const response = await fetch("/api/data/player", {
@@ -156,24 +151,18 @@ export default function CreateMoveForms({ player }: CreateMoveFormsProps) {
         body: fd,
       });
 
+
       if (!response.ok) {
+        console.log("response", response)
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      // Optionally, process the response data if needed
-      const responseData = await response.json();
-      console.log("Server Response:", responseData);
-
-      // Here you might want to update the UI or state based on the response
-      // For example, show a success message, reset form, or update local player data
     } catch (error) {
-      console.error("Failed to update player data:", error);
-      // Here you could show an error message to the user or retry the request
+      console.error("Failed to update player data:", JSON.stringify({error}));
     }
   };
 
-  const canMakeNewMove = player.moves.length - player.level &&
-    player.moves.length <= 4;
+  const canMakeNewMove = player.moves.length - player.level && player.moves.length <= 4;
   return (
     <Fragment>
       <form onSubmit={handleSubmit}>
