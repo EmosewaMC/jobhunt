@@ -8,7 +8,7 @@ export default function App({ Component }: PageProps) {
         <title>Job Hunt</title>
         <link rel="stylesheet" href="/styles.css" />
       </head>
-      <body>
+      <body class="h-screen bg-[rgb(134,239,172)]" >
         <Component />
       </body>
     </html>

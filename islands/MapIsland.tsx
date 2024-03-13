@@ -78,7 +78,7 @@ function MapComponent(props: MapComponentProps) {
 
     // Add the image overlay
     // Replace 'YOUR_IMAGE_URL_HERE' with the URL of your image
-    leaf.imageOverlay("/temp_map.png", bounds).addTo(map);
+    leaf.imageOverlay("/jobhunt_map.png", bounds).addTo(map);
     map.fitBounds(bounds);
     map.setMaxBounds(bounds);
     const createMarker = (interviewerStats: PlayerStats) => {

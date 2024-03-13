@@ -11,7 +11,7 @@ export default async function Home(req : Request) {
 		<div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
 		  <h1 class="text-4xl font-bold">{translate("WELCOME_BACK", req)}, {user.googleName}</h1>
 		  <a class="my-4 text-blue-500 underline" href="/worldMap">
-			{translate("RETURN_TO_WORLD_MAP", req)}
+		  <image src={"/jobhuntLoadingScreen.png"}  />
 		  </a>
 		</div>
 	  </div>

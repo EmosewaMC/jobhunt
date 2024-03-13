@@ -8,7 +8,7 @@ export interface LoggedInCtx {
 export default function Nav(ctx: LoggedInCtx) {
   return (
     <>
-      <aside class="w-64 h-full bg-gray-800 text-white flex flex-col">
+      <aside class="w-64 h-screen bg-gray-800 text-white flex flex-col">
         <div class="text-3xl text-center py-4 border-b border-gray-700">
           <a href="/" class="py-2 hover:bg-gray-700 rounded">{translate("LOGO", ctx.req)}</a>
         </div>

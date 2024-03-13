@@ -13,7 +13,6 @@ import * as $api_data_experience from "./routes/api/data/experience.ts";
 import * as $api_data_game from "./routes/api/data/game.ts";
 import * as $api_data_network from "./routes/api/data/network.ts";
 import * as $api_data_player from "./routes/api/data/player.ts";
-import * as $greet_name_ from "./routes/greet/[name].tsx";
 import * as $index from "./routes/index.tsx";
 import * as $interview from "./routes/interview.tsx";
 import * as $network from "./routes/network.tsx";
@@ -41,7 +40,6 @@ const manifest = {
     "./routes/api/data/game.ts": $api_data_game,
     "./routes/api/data/network.ts": $api_data_network,
     "./routes/api/data/player.ts": $api_data_player,
-    "./routes/greet/[name].tsx": $greet_name_,
     "./routes/index.tsx": $index,
     "./routes/interview.tsx": $interview,
     "./routes/network.tsx": $network,
