@@ -9,6 +9,7 @@ import * as $_layout from "./routes/_layout.tsx";
 import * as $api_auth_callback from "./routes/api/auth/callback.ts";
 import * as $api_auth_login from "./routes/api/auth/login.ts";
 import * as $api_auth_logout from "./routes/api/auth/logout.ts";
+import * as $api_data_experience from "./routes/api/data/experience.ts";
 import * as $api_data_game from "./routes/api/data/game.ts";
 import * as $api_data_network from "./routes/api/data/network.ts";
 import * as $api_data_player from "./routes/api/data/player.ts";
@@ -36,6 +37,7 @@ const manifest = {
     "./routes/api/auth/callback.ts": $api_auth_callback,
     "./routes/api/auth/login.ts": $api_auth_login,
     "./routes/api/auth/logout.ts": $api_auth_logout,
+    "./routes/api/data/experience.ts": $api_data_experience,
     "./routes/api/data/game.ts": $api_data_game,
     "./routes/api/data/network.ts": $api_data_network,
     "./routes/api/data/player.ts": $api_data_player,

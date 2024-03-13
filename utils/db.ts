@@ -39,3 +39,14 @@ export async function getPlayerMoves(googleID: string): Promise<PlayerMove[]>{
   return moves;
 }
 
+export async function playerGainExperience(googleID: string, experience: number) {
+  const player = await getPlayer(googleID) as Player;
+  player.experience += experience;
+  if(player.experience >= player.level * 100) {
+    //they gain 10 points to spend on moves and level up
+    player.unspentPoints += 10;
+    player.level++;
+  }
+  return await setPlayer(googleID, player);
+}
+
