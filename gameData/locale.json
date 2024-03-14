@@ -160,6 +160,11 @@
 			"en": "Submit",
 			"zh": "提交",
 			"ar": "إرسال"
+		},
+		"QUALIFICATIONS_REQUIRED": {
+			"en": "Qualifications Required",
+			"zh": "所需资格",
+			"ar": "المؤهلات المطلوبة"
 		}
 	}
 ]

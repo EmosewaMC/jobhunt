@@ -4,7 +4,7 @@ import { Button } from "../components/Button.tsx";
 import { language_translate } from "gameData/locale.ts";
 import { Player, PlayerMove, PlayerStats } from "gameData/playerStats.ts";
 
-import { playerGainExperience } from "../utils/db.ts";  
+import { playerGainExperience } from "../utils/db.ts";
 import * as Dialog from "../gameData/dialog.json" with { type: "json" };
 
 //NOTE: This route will not be available through the nav later once we setup reaching here from the map route
@@ -63,7 +63,6 @@ export default function P5Canvas(
 
   const dialogIterator = createDialogIterator();
 
-
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js";
@@ -117,15 +116,15 @@ export default function P5Canvas(
         } else {
           this.questionPrompt = dialogIterator.next() as string;
         }
-
       },
       questionPrompt: dialogIterator.next() as string,
       //have to add this bc we don't want to mutate the original object
       currentQuestion: Object.assign({}, interviewData) as PlayerStats,
       persuasion: 0.5,
       winScreen: async () => {
-        
-        const sum = Object.values(interviewData).reduce((acc, curr)=>{ return acc + curr}, 0);
+        const sum = Object.values(interviewData).reduce((acc, curr) => {
+          return acc + curr;
+        }, 0);
         const exp = sum * user.level;
         console.log("experience gained", exp);
         const fd = new FormData();
@@ -134,7 +133,6 @@ export default function P5Canvas(
           method: "POST",
           body: fd,
         });
-
 
         winDialog.showModal();
       },
@@ -148,12 +146,26 @@ export default function P5Canvas(
       new p5((p: any) => {
         let bgImg: any;
         p.preload = function () {
-          bgImg = p.loadImage("/interview_sketch.png");
+          bgImg = p.loadImage(`/battle${user.level > 1 ? 2 : 1}.png`);
         };
         p.setup = function () {
-          p.createCanvas(bgImg.width, bgImg.height).parent("p5-canvas");
+          const maxWidth = window.innerWidth * 0.8; // Maximum width constraint (80% of window width)
+          const maxHeight = window.innerHeight * 0.8; // Maximum height constraint (80% of window height)
+
+          const scaledWidth = Math.min(bgImg.width, maxWidth);
+          const scaledHeight = Math.min(bgImg.height, maxHeight);
+
+          const scale = Math.min(
+            scaledWidth / bgImg.width,
+            scaledHeight / bgImg.height,
+          );
+
+          const canvasWidth = bgImg.width * scale;
+          const canvasHeight = bgImg.height * scale;
+
+          p.createCanvas(canvasWidth, canvasHeight).parent("p5-canvas");
           p.background(bgImg);
-          p.textSize(16);
+          p.textSize(16 * scale);
           p.text(
             language_translate("PERSUASION_METER", language),
             p.width * 0.2,
@@ -168,7 +180,7 @@ export default function P5Canvas(
         };
 
         p.draw = function () {
-          //clear the canvas 
+          //clear the canvas
           p.background(bgImg);
 
           p.fill(255);

@@ -1,14 +1,13 @@
-import * as Leaflet from "leaflet"; 
+import * as Leaflet from "leaflet";
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { useContext, useEffect, useState } from "preact/hooks";
 import { ComponentChildren, createContext } from "preact";
 import { PlayerStats } from "gameData/playerStats.ts";
 import { Player } from "gameData/playerStats.ts";
-import {language_translate} from "gameData/locale.ts";
-import * as Interviews from "../gameData/interviewSettings.json" with {
-  type: "json",
-};
+import { language_translate } from "gameData/locale.ts";
 
+
+import { generateInterview } from "gameData/generateInterviews.ts";
 
 interface InterviewData {
   level: number;
@@ -63,10 +62,10 @@ const sendInterviewRequest = async (formData: FormData) => {
   }
   console.log("response on client", response);
   return response;
-}
+};
 function MapComponent(props: MapComponentProps) {
   const leaf = useContext(LeafletContext);
-  const interviewData = JSON.parse(JSON.stringify(Interviews.default));
+  const interviewData = generateInterview(props.level);
   if (!leaf) return <div>Component placeholder</div>;
   useEffect(() => {
     const map = leaf.map("map").setView(leaf.latLng(0, 0), 2);
@@ -76,24 +75,48 @@ function MapComponent(props: MapComponentProps) {
       northEast = leaf.latLng(100, 400),
       bounds = leaf.latLngBounds(southWest, northEast);
 
-    // Add the image overlay
-    // Replace 'YOUR_IMAGE_URL_HERE' with the URL of your image
     leaf.imageOverlay("/jobhunt_map.png", bounds).addTo(map);
     map.fitBounds(bounds);
     map.setMaxBounds(bounds);
+
     const createMarker = (interviewerStats: PlayerStats) => {
+      const randAngle = Math.random() * 2 * Math.PI;
+      const randRadius = Math.random() * 80;
+
+      const lat = Math.sin(randAngle) * randRadius;
+      const lng = Math.cos(randAngle) * randRadius;
+
       //generate random coordinates
-      const lat = Math.random() * 100 - 100;
-      const lng = Math.random() * 100 - 100;
       const location = leaf.latLng(lat, lng);
       const marker = leaf.marker(location).addTo(map);
-      marker.bindPopup(language_translate("CLICK_TO_PROCEED_TO_INTERVIEW", props.player.lastLanguage));
 
-      
+      const maxStat =
+        Object.entries(interviewerStats).sort(
+          (a: [string, number], b: [string, number]) => {
+            return b[1] - a[1];
+          },
+        )[0];
+      marker.bindPopup(
+        `${
+          language_translate(
+            "QUALIFICATIONS_REQUIRED",
+            props.player.lastLanguage,
+          )
+        } - ${
+          language_translate(
+            maxStat[0].toUpperCase(),
+            props.player.lastLanguage,
+          )
+        }: ${maxStat[1]}`,
+      );
+      // marker.bindPopup(JSON.stringify(maxStat))
+      // marker.bindPopup("Qualifications: \n" + language_translate(, props.player.lastLanguage) + ": " + maxStat[0][1]);
+      // marker.bindPopup(language_translate("CLICK_TO_PROCEED_TO_INTERVIEW", props.player.lastLanguage));
+
       marker.on("mouseover", function (e) {
         marker.openPopup();
       });
-      
+
       // Optional: Close popup on mouse out
       marker.on("mouseout", function (e) {
         marker.closePopup();
@@ -101,10 +124,10 @@ function MapComponent(props: MapComponentProps) {
 
       // Redirect on click
       marker.on("click", async () => {
-        //we need to send the post req to generate the interview instead. 
+        //we need to send the post req to generate the interview instead.
         const formData = new FormData();
         formData.append("interviewerStats", JSON.stringify(interviewerStats));
-         const response = await fetch("/api/data/game", {
+        const response = await fetch("/api/data/game", {
           method: "POST",
           body: formData,
         });
@@ -114,16 +137,11 @@ function MapComponent(props: MapComponentProps) {
           throw new Error("Network response was not ok");
         }
 
-        globalThis.location.href = "/interview"; 
-
+        globalThis.location.href = "/interview";
       });
     };
 
-    const currentLevelPrompts =
-      interviewData.find((interview: InterviewData) => {
-        return interview.level == props.level;
-      }).prompts;
-    for (const prompt of currentLevelPrompts) {
+    for (const prompt of interviewData) {
       createMarker(prompt);
     }
   });
