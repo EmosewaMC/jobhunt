@@ -170,6 +170,11 @@
 			"en": "You have no moves! Create one here",
 			"zh": "您没有任何动作！在此处创建一个",
 			"ar": "ليس لديك حركات! أنشئ واحدة هنا"
+		},
+		"SUCCESSFUL_SUBMIT": {
+			"en": "Successfully submitted!",
+			"zh": "提交成功！",
+			"ar": "تم الإرسال بنجاح!"
 		}
 	}
 ]

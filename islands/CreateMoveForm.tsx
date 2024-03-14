@@ -4,6 +4,7 @@ import { Signal, useSignal } from "@preact/signals";
 import { Fragment } from "preact";
 import { language_translate } from "gameData/locale.ts";
 import { translate } from "gameData/locale.ts";
+import { useState } from "preact/hooks";
 
 interface MoveFormProps {
   index: number;
@@ -24,11 +25,11 @@ function MoveForm(
     acc[key] = useSignal(value);
     return acc;
   }, {} as Record<string, Signal<number>>);
-  const moveSignal  = useSignal(move) as Signal<PlayerMove>;
+  const moveSignal = useSignal(move) as Signal<PlayerMove>;
   const handleNameChange = (e: Event) => {
     const target = e.target as HTMLInputElement;
     moveSignal.value = { ...moveSignal.value, move: target.value };
-  }
+  };
 
   const handleIncrement = (signal: Signal<number>) => {
     if (signal.value >= 0 && unallocatedPoints > 0) {
@@ -84,7 +85,9 @@ function MoveForm(
   return (
     <div>
       <div class="text-2xl font-bold text-center">
-        <label for="move-name">{language_translate("MOVE_NAME", player.lastLanguage)}</label>
+        <label for="move-name">
+          {language_translate("MOVE_NAME", player.lastLanguage)}
+        </label>
         {/* if we have a move name, we want to just return an unmodifiable <input> */}
         <input
           id={`move-name-${index}`}
@@ -112,6 +115,9 @@ export default function CreateMoveForms({ player }: CreateMoveFormsProps) {
     const newPoints = unallocatedPoints.value + delta;
     unallocatedPoints.value = newPoints >= 0 ? newPoints : 0; // Prevent negative unallocated points
   };
+
+  const [modalOpacity, setModalOpacity] = useState(1);
+  const [showModal, setShowModal] = useState(false);
 
   const handleSubmit = async (e: Event) => {
     e.preventDefault();
@@ -151,22 +157,69 @@ export default function CreateMoveForms({ player }: CreateMoveFormsProps) {
         body: fd,
       });
 
-
-      if (!response.ok) {
-        console.log("response", response)
+      if (response.ok) {
+        setShowModal(true);
+      } else {
+        console.log("response", response);
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-
     } catch (error) {
-      console.error("Failed to update player data:", JSON.stringify({error}));
+      console.error("Failed to update player data:", JSON.stringify({ error }));
     }
   };
 
-  const canMakeNewMove = player.moves.length - player.level && player.moves.length <= 4;
+  const canMakeNewMove = player.moves.length - player.level &&
+    player.moves.length <= 4;
+
   return (
     <Fragment>
+      {showModal && (
+        <dialog
+        style={{
+          position: "fixed",
+          top: "0",
+          left: "0",
+          // transform: "translate(-50%, -50%)",
+          backgroundColor: "#fff",
+          padding: "2rem",
+          borderRadius: "0.5rem",
+          boxShadow: "0 0 1rem rgba(0, 0, 0, 0.3)",
+          zIndex: 1000,
+          width: "fit-content", // Add this line
+        }}
+          open
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <p style={{ fontSize: "1.2rem", marginBottom: "1rem" }}>
+              {language_translate("SUCCESSFUL_SUBMIT", player.lastLanguage)}
+            </p>
+            <button
+              style={{
+                padding: "0.5rem 1rem",
+                backgroundColor: "#007bff",
+                color: "#fff",
+                border: "none",
+                borderRadius: "0.25rem",
+                cursor: "pointer",
+              }}
+              onClick={() => setShowModal(false)}
+            >
+              Close
+            </button>
+          </div>
+        </dialog>
+      )}
       <form onSubmit={handleSubmit}>
-        <p>{language_translate("UNALLOCATED_POINTS", player.lastLanguage)}: {unallocatedPoints.value}</p>
+        <p>
+          {language_translate("UNALLOCATED_POINTS", player.lastLanguage)}:{" "}
+          {unallocatedPoints.value}
+        </p>
         {player.moves.map((move, index) => (
           <MoveForm
             index={index}
@@ -174,7 +227,7 @@ export default function CreateMoveForms({ player }: CreateMoveFormsProps) {
             move={move}
             onPointsChange={handlePointsChange}
             unallocatedPoints={unallocatedPoints.value}
-			player={player}
+            player={player}
           />
         ))}
         {canMakeNewMove
@@ -193,11 +246,13 @@ export default function CreateMoveForms({ player }: CreateMoveFormsProps) {
               }}
               onPointsChange={handlePointsChange}
               unallocatedPoints={unallocatedPoints.value}
-			  player={player}
+              player={player}
             />
           )
           : null}
-        <Button type="submit">{language_translate("SUBMIT", player.lastLanguage)}</Button>
+        <Button type="submit">
+          {language_translate("SUBMIT", player.lastLanguage)}
+        </Button>
       </form>
     </Fragment>
   );
