@@ -165,6 +165,11 @@
 			"en": "Qualifications Required",
 			"zh": "所需资格",
 			"ar": "المؤهلات المطلوبة"
+		},
+		"NO_MOVES": {
+			"en": "You have no moves! Create one here",
+			"zh": "您没有任何动作！在此处创建一个",
+			"ar": "ليس لديك حركات! أنشئ واحدة هنا"
 		}
 	}
 ]

@@ -124,7 +124,15 @@ function MapComponent(props: MapComponentProps) {
 
       // Redirect on click
       marker.on("click", async () => {
-        //we need to send the post req to generate the interview instead.
+        if(!props.player.moves.length){
+          const link = document.createElement("a");
+          link.href = "/resume";
+          link.innerText = language_translate("NO_MOVES", props.player.lastLanguage);
+          marker.bindPopup(link); 
+          marker.openPopup();
+          marker.off("mouseout"); 
+          return;
+        }
         const formData = new FormData();
         formData.append("interviewerStats", JSON.stringify(interviewerStats));
         const response = await fetch("/api/data/game", {
