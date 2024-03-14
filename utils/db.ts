@@ -50,3 +50,11 @@ export async function playerGainExperience(googleID: string, experience: number)
   return await setPlayer(googleID, player);
 }
 
+export async function getPlayerList() {
+  const iter = await deno_kv.list({prefix: ["player"]});
+  const playerList = [];
+  for await (const player of iter) {
+    playerList.push(player.value);
+  }
+  return playerList;
+}

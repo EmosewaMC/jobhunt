@@ -3,6 +3,7 @@ import { getUser } from "$utils/get_user.ts";
 import type { Player } from "gameData/playerStats.ts";
 import AsyncLayout from "../layouts/asyncLayout.tsx";
 import { translate } from "gameData/locale.ts";
+import { getPlayerList} from "../utils/db.ts";
 
 // import Form from "../islands/Form.tsx";
 
@@ -11,6 +12,18 @@ import { translate } from "gameData/locale.ts";
 //NOTE: This route will not be available through the nav later once we setup reaching here from the map route
 export default async function Home(req: Request) {
   const player = await getUser(req) as Player;
+  const playerList = await getPlayerList() as Player[];
+  const friends = [];
+  const notFriends = [];
+  for(const p of playerList){
+    if(player.friendsList.includes(p.googleId)){
+      friends.push(p);
+    } else {
+      if(p.googleId !== player.googleId) {
+        notFriends.push(p);
+      }
+    } 
+  }
   if (!player) {
 	return (
 	  <div class="px-4 py-8 mx-auto bg-[#86efac]">

@@ -17,7 +17,7 @@ export default function Nav(ctx: LoggedInCtx) {
           <a href="/worldMap" class="py-2 hover:bg-gray-700 rounded">{translate("MAP", ctx.req)}</a>
           <a href="/resume" class="py-2 hover:bg-gray-700 rounded">{translate("RESUME", ctx.req)}</a>
           <a href="/network" class="py-2 hover:bg-gray-700 rounded">{translate("NETWORK", ctx.req)}</a>
-          <a href="/interview" class="py-2 hover:bg-gray-700 rounded">{translate("TEMP_INTERVIEW", ctx.req)}</a>
+          {/* <a href="/interview" class="py-2 hover:bg-gray-700 rounded">{translate("TEMP_INTERVIEW", ctx.req)}</a> */}
           <a href="/api/auth/logout" class="px-4 py-2 border rounded flex gap-4 hover:bg-gray-200 transition-all">
             <GoogleIcon /> {translate("LOGOUT", ctx.req)}
           </a>
