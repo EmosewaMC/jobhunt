@@ -50,7 +50,7 @@ export function NetworkButton(player: NetworkButtonProps) {
   return (
 	<form name="AddConnectionForm" onSubmit={handleSubmit}>
     	<div class="flex gap-8 py-6">
-		    <Input placeholder={language_translate("PLAYER_NAME", player.player.lastLanguage)} name="connection_name"/>
+		    <Input placeholder={language_translate("PLAYER_ID", player.player.lastLanguage)} name="connection_name"/>
     	  <Button onClick={() => console.log("Add")} type="submit">{language_translate("ADD_CONNECTION", player.player.lastLanguage)}</Button>
     	</div>
 	</form>
@@ -63,8 +63,8 @@ interface NetworkListProps {
 
 export function NetworkList({ player }: NetworkListProps) {
 	return (
-		<div class="flex gap-8 py-6">
-			<ul>{player.friendsList.map(player => <li>{player}</li>)}</ul>
+		<div class="flex gap-2 items-center justify-center">
+			{/* <ul>{player.friendsList.map(player => <li>{player}</li>)}</ul> */}
 		</div>
 	);
 }

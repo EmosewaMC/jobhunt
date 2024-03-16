@@ -126,8 +126,8 @@
 			"zh": "可爱",
 			"ar": "التعلق"
 		},
-		"PLAYER_NAME": {
-			"en": "Player Name",
+		"PLAYER_ID": {
+			"en": "Player ID",
 			"zh": "玩家名称",
 			"ar": "اسم اللاعب"
 		},
@@ -175,6 +175,11 @@
 			"en": "Successfully submitted!",
 			"zh": "提交成功！",
 			"ar": "تم الإرسال بنجاح!"
+		},
+		"UNCONNECTED_PLAYERS": {
+			"en": "Unconnected Players",
+			"zh": "未连接的玩家",
+			"ar": "لاعبون غير متصلون"
 		}
 	}
 ]
