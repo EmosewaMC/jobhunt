@@ -16,7 +16,8 @@ export function generateInterview(level: number): PlayerStats[] {
         // 5 prompts per level
         // the sum of the stats should be no more than 10 * level
         const stat: PlayerStats = { charisma: 0, motivation: 0, technicalSkills: 0, likability: 0 };
-        let remaining = 10 * level;
+
+        let remaining = 10 * (level > 2 ? 2 : level);
         const keys = Object.keys(stat) as Array<keyof PlayerStats>;
 
         // Shuffle the keys
