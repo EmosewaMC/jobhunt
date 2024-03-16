@@ -169,7 +169,7 @@ export default function CreateMoveForms({ player }: CreateMoveFormsProps) {
   };
 
   const canMakeNewMove = player.moves.length - player.level &&
-    player.moves.length <= 4;
+    player.moves.length < 4;
 
   return (
     <Fragment>
