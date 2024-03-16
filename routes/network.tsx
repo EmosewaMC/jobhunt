@@ -3,7 +3,7 @@ import { getUser } from "$utils/get_user.ts";
 import type { Player } from "gameData/playerStats.ts";
 import { translate } from "gameData/locale.ts";
 import { getPlayerList } from "../utils/db.ts";
-import {MockInterview} from "../islands/MockInterview.tsx"; 
+import { MockInterview } from "../islands/MockInterview.tsx";
 // import Form from "../islands/Form.tsx";
 
 // export default P5Canvas;
@@ -49,20 +49,34 @@ export default async function Home(req: Request) {
   );
   const friendsList = (
     <ul>
-      {friends.map((p) => <MockInterview playerRequested={p} playerRequesting={player} />)}
+      {friends.map((p) => (
+        <MockInterview playerRequested={p} playerRequesting={player} />
+      ))}
     </ul>
   );
-  console.log("Friends:", friends);
-  console.log("Not Friends:", notFriends);
   return (
     <div class="px-4 py-8 mx-auto bg-[#86efac]">
       <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
-        <h1 class="text-2xl font-bold">
-          {translate("UNCONNECTED_PLAYERS", req)}
-        </h1>
-        {notFriendsList}
-        <h1 class="text-2xl font-bold">{translate("MY_NETWORK", req)}</h1>
-        {friendsList}
+        {notFriends.length
+          ? (
+            <>
+              <h1 class="text-2xl font-bold">
+                {translate("UNCONNECTED_PLAYERS", req)}
+              </h1>
+              {notFriendsList}
+            </>
+          )
+          : null}
+        {friends.length
+          ? (
+            <>
+              <h1 class="text-2xl font-bold">
+                {translate("MY_NETWORK", req)}
+              </h1>
+              {friendsList}
+            </>
+          )
+          : null}
       </div>
     </div>
   );
