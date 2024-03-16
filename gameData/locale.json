@@ -180,6 +180,16 @@
 			"en": "Unconnected Players",
 			"zh": "未连接的玩家",
 			"ar": "لاعبون غير متصلون"
+		},
+		"MOCK_INTERVIEW": {
+			"en": "Mock Interview",
+			"zh": "模拟面试",
+			"ar": "مقابلة تجريبية"
+		},
+		"FRIEND_NOT_READY": {
+			"en": "Your friend is not ready to interview yet",
+			"zh": "您的朋友还没有准备好面试",
+			"ar": "صديقك ليس جاهزًا لإجراء المقابلة بعد"
 		}
 	}
 ]

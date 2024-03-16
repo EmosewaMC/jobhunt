@@ -21,6 +21,7 @@ import * as $resume from "./routes/resume.tsx";
 import * as $worldMap from "./routes/worldMap.tsx";
 import * as $CreateMoveForm from "./islands/CreateMoveForm.tsx";
 import * as $MapIsland from "./islands/MapIsland.tsx";
+import * as $MockInterview from "./islands/MockInterview.tsx";
 import * as $Nav from "./islands/Nav.tsx";
 import * as $NavLoggedIn from "./islands/NavLoggedIn.tsx";
 import * as $NetworkButton from "./islands/NetworkButton.tsx";
@@ -51,6 +52,7 @@ const manifest = {
   islands: {
     "./islands/CreateMoveForm.tsx": $CreateMoveForm,
     "./islands/MapIsland.tsx": $MapIsland,
+    "./islands/MockInterview.tsx": $MockInterview,
     "./islands/Nav.tsx": $Nav,
     "./islands/NavLoggedIn.tsx": $NavLoggedIn,
     "./islands/NetworkButton.tsx": $NetworkButton,

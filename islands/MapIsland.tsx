@@ -52,17 +52,6 @@ interface MapComponentProps {
   player: Player;
 }
 
-const sendInterviewRequest = async (formData: FormData) => {
-  const response = await fetch("/api/data/game", {
-    method: "POST",
-    body: formData,
-  });
-  if (!response.ok) {
-    throw new Error("Network response was not ok");
-  }
-  console.log("response on client", response);
-  return response;
-};
 function MapComponent(props: MapComponentProps) {
   const leaf = useContext(LeafletContext);
   const interviewData = generateInterview(props.level);

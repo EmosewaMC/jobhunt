@@ -7,13 +7,15 @@ export const handler: Handlers = {
   async POST(request) {
     const frmData = await request.formData();
     const connection_name = frmData.get("connection_name");
-    console.log(connection_name);
 	const addedConnection = await getPlayer(connection_name?.toString() as string) as Player;
     const player = await getUser(request) as Player;
 	if (!player.friendsList.includes(addedConnection.googleId)) {
     	player.friendsList.push(addedConnection.googleId);
     	await deno_kv.set(["player", player.googleId], player);
-	}
+      console.log("Added friend", addedConnection.googleName);
+	} else {
+    throw new Error("Player is already a friend");
+  }
 
     return new Response("", { 
       status: 200, headers: {
