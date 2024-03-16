@@ -87,14 +87,14 @@
 			"ar": "تسجيل الدخول"
 		},
 		"YOU_WIN": {
-			"en": "You Win",
-			"zh": "你赢了",
-			"ar": "انت فزت"
+			"en": "Congratulations! We'd like to move forward with your application. We'll be in touch soon to discuss next steps.",
+			"zh": "恭喜！我们希望继续您的申请。我们会尽快与您联系，讨论下一步。",
+			"ar": "تهانينا! نود المضي قدماً مع طلبك. سنكون على اتصال قريباً لمناقشة الخطوات التالية."
 		},
 		"YOU_LOSE": {
-			"en": "You Lose",
-			"zh": "你输了",
-			"ar": "انت خسرت"
+			"en": "We regret to inform you that we will not be moving forward with your application at this time. We appreciate your interest in the position and wish you the best of luck in your job search.",
+			"zh": "我们很遗憾地通知您，我们目前不会继续您的申请。我们感谢您对这个职位的兴趣，并祝您在求职中好运。",
+			"ar": "نأسف لإبلاغكم بأننا لن نتقدم في طلبكم في هذا الوقت. نحن نقدر اهتمامكم بالمنصب ونتمنى لكم حظاً سعيداً في البحث عن وظيفة."
 		},
 		"HELLO": {
 			"en": "Hello",
