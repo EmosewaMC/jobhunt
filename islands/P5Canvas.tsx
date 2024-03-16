@@ -2,7 +2,7 @@
 import { useEffect } from "preact/hooks";
 import { Button } from "../components/Button.tsx";
 import { language_translate } from "gameData/locale.ts";
-import { Player, PlayerMove, PlayerStats } from "gameData/playerStats.ts";
+import { Player, PlayerMove, PlayerStats, symbolMap } from "gameData/playerStats.ts";
 
 import { playerGainExperience } from "../utils/db.ts";
 import * as Dialog from "../gameData/dialog.json" with { type: "json" };
@@ -48,9 +48,14 @@ export default function P5Canvas(
 ) {
   const backPathname: string = user !== null ? "/worldMap" : "/";
   const retryPathname: string = "/interview";
+
   const movesJSX = playerMoves.map((move, index) => {
+    let titleString = "";
+    for (const [stat, value] of Object.entries(move.pointsAllocated)) {
+      titleString += `${symbolMap[stat as keyof typeof symbolMap]}: ${value} \n`;
+    }
     return (
-      <Button
+      <Button title={titleString}
         class="w-full font-bold bg-blue-500 hover:bg-blue-700  py-2 px-4 rounded "
         onClick={() => {
           dispatchMove(index);
@@ -166,8 +171,10 @@ export default function P5Canvas(
           p.createCanvas(canvasWidth, canvasHeight).parent("p5-canvas");
           p.background(bgImg);
           p.textSize(16 * scale);
+          
+        
           p.text(
-            language_translate("PERSUASION_METER", language),
+            language_translate("PERSUASION_METER" , language),
             p.width * 0.2,
             p.height * 0.85,
           );
@@ -196,9 +203,14 @@ export default function P5Canvas(
           p.fill(0); // Set text color to black
           p.textSize(16); // Set text size
           p.textAlign(p.CENTER, p.CENTER); // Set text alignment to center
-
+          const primaryStat = Object.entries(gameManager.currentQuestion).reduce( 
+            (acc, [key, value]) => {
+              return value > acc[1] ? [key, value] : acc;
+            },
+            ["", 0]
+          )[0];
           // Draw text for the bar
-          p.text(gameManager.questionPrompt, p.width / 2, barY - 20);
+          p.text(`${gameManager.questionPrompt} ${symbolMap[primaryStat as keyof typeof symbolMap]}`, p.width / 2, barY - 20);
         };
 
         p.goTo = function (link: string) {

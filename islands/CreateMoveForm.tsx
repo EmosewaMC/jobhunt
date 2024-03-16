@@ -1,5 +1,5 @@
 import { Button } from "../components/Button.tsx";
-import { Player, PlayerMove, PlayerStats } from "gameData/playerStats.ts";
+import { Player, PlayerMove, symbolMap } from "gameData/playerStats.ts";
 import { Signal, useSignal } from "@preact/signals";
 import { Fragment } from "preact";
 import { language_translate } from "gameData/locale.ts";
@@ -48,9 +48,9 @@ function MoveForm(
   const counters = Object.entries(statsSignals).map(([key, signal]) => (
     <Fragment key={key}>
       {/* <div class="flex gap-8 py-6 items-center justify-between"> */}
-      <div class="grid-cols-2">
-        <label class="font-bold" for={`${move?.move}-${key}`}>
-          {language_translate(key.toUpperCase(), player.lastLanguage)}
+      <div class="grid-cols-2 text-center my-3">
+        <label class="font-bold " for={`${move?.move}-${key}`}>
+          {language_translate(key.toUpperCase(), player.lastLanguage) + `  ${symbolMap[key as keyof typeof symbolMap]}`}
         </label>
         <div class="flex  items-center justify-between">
           <Button
@@ -62,7 +62,7 @@ function MoveForm(
             -1
           </Button>
           <p class="text-3xl tabular-nums" id={`${move?.move}-${key}`}>
-            {signal.value}
+            {signal.value }
           </p>
           <input
             type="hidden"

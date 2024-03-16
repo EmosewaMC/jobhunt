@@ -2,7 +2,7 @@ import * as Leaflet from "leaflet";
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { useContext, useEffect, useState } from "preact/hooks";
 import { ComponentChildren, createContext } from "preact";
-import { PlayerStats } from "gameData/playerStats.ts";
+import { PlayerStats, symbolMap} from "gameData/playerStats.ts";
 import { Player } from "gameData/playerStats.ts";
 import { language_translate } from "gameData/locale.ts";
 
@@ -107,11 +107,8 @@ function MapComponent(props: MapComponentProps) {
             maxStat[0].toUpperCase(),
             props.player.lastLanguage,
           )
-        }: ${maxStat[1]}`,
+        } ${symbolMap[maxStat[0] as keyof typeof symbolMap]}: ${maxStat[1]}`,
       );
-      // marker.bindPopup(JSON.stringify(maxStat))
-      // marker.bindPopup("Qualifications: \n" + language_translate(, props.player.lastLanguage) + ": " + maxStat[0][1]);
-      // marker.bindPopup(language_translate("CLICK_TO_PROCEED_TO_INTERVIEW", props.player.lastLanguage));
 
       marker.on("mouseover", function (e) {
         marker.openPopup();

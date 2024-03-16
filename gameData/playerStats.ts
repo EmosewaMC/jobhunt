@@ -8,7 +8,7 @@ export interface PlayerStats {
 export interface PlayerMove {
     move: string;
     pointsAllocated: PlayerStats;
-} 
+}
 
 export interface Player {
     googleId: string;
@@ -19,13 +19,13 @@ export interface Player {
     moves: PlayerMove[];
     unspentPoints: number;
     friendsList: string[];
-	lastLanguage: string;
+    lastLanguage: string;
 }
 
 export function initPlayer(googleId: string, googleName: string): Player {
     return {
         googleId: googleId,
-		googleName: googleName,
+        googleName: googleName,
         experience: 0,
         stats: {
             charisma: 0,
@@ -37,6 +37,13 @@ export function initPlayer(googleId: string, googleName: string): Player {
         moves: [],
         unspentPoints: 10,
         friendsList: [],
-		lastLanguage: "en",
+        lastLanguage: "en",
     };
+}
+
+export const symbolMap = {
+    charisma: "😎",
+    motivation: "💪",
+    technicalSkills: "🤓",
+    likability: "🤗",
 }
