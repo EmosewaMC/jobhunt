@@ -6,6 +6,7 @@ import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
 import * as $_authError from "./routes/_authError.tsx";
 import * as $_layout from "./routes/_layout.tsx";
+import * as $about from "./routes/about.tsx";
 import * as $api_auth_callback from "./routes/api/auth/callback.ts";
 import * as $api_auth_login from "./routes/api/auth/login.ts";
 import * as $api_auth_logout from "./routes/api/auth/logout.ts";
@@ -33,6 +34,7 @@ const manifest = {
     "./routes/_app.tsx": $_app,
     "./routes/_authError.tsx": $_authError,
     "./routes/_layout.tsx": $_layout,
+    "./routes/about.tsx": $about,
     "./routes/api/auth/callback.ts": $api_auth_callback,
     "./routes/api/auth/login.ts": $api_auth_login,
     "./routes/api/auth/logout.ts": $api_auth_logout,
