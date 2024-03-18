@@ -11,9 +11,9 @@
     <h2>Introduction</h2>
     <p>We made a vertical slice of our game, <b>Jobhunt.io</b>, for a university course we have taken together, with the exception of our external help.</p>
     <p>Here is an embedded <b>video</b> of our game in action:</p>
-        <!--video width="500px" height="500px" controls="controls"-->
-            <!--source src=".mp4" type="video/mp4" /-->
-        <!--/video-->
+        <video width="500px" height="300px" controls="controls">
+            <source src="./assets/CMPM_171_Jobhunt_io_Shortplay_Video.mp4" type="video/mp4">
+        </video>
     <p>We did it on a <b>team</b> consisting of:</p>
         <ul>
             <li><b>Engine Lead</b>: <i>Aaron Lee</i></li>
@@ -26,25 +26,35 @@
 	<!-- Design Constraints-->
     <h2>Design Constraints</h2>
     <p>Our game was designed under the following externally imposed constraints:</p>
-        <h3>Accessibility</h3>
-            <h4>Vision:</h4>
-                <p>For the vision constraint, our team was tasked with making sure our game can be completed using a high contrast grayscale image filter. Our current color scheme is contrasting enough even when applying colorblind filters so a player can easily distinguish between the items on the screen. </p>
-            <h4>Touch:</h4>
-                <p>For the touch constraint, our team was tasked with making sure our game can be completed using a single hand (but another hand may help). To play our game, if a player were to play on their PC/Laptop, all they would need is access to a mouse/trackpad to help them navigate through the game by right clicking on specific events. If played on a mobile device, all the player would really need to play is at least one finger to tap on the screen and trigger certain events.</p>
-            <h4>Hearing:</h4>
-                <p>For the hearing constraint, our team was tasked with making sure our game can be completed with no auditory information (but sonic art is appreciated). Our game is currently implemented without sound so a player with hearing impairments can have the same experience as someone without them.</p>
-            <h4>Rest:</h4>
-                <p>For the rest constraint, our team was tasked with making sure active play can always reach a natural resting point within two minutes without the need to actively pause the game. As we do not have any active timers implemented affecting gameplay, players can take a step away from the game whenever they want and not face any penalties.</p>
-        <h3>Localization</h3>
-            <p>For the localization requirements, our team was tasked with providing language support for two different written languages, with at least one language using either a logographic script or a right-to-left script.</p>
-            <p>Currently Supported Languages:</p>
+        <ul>
+            <li><b>Accessibility</b>:</li>
                 <ul>
-                    <li>English (US)</li>
-                    <li>Mandarin</li>
-                    <li>Arabic</li>
+                    <li><i>Vision</i>: For the vision constraint, our team was tasked with making sure our game can be completed using a high contrast grayscale image filter. 
+                        Our current color scheme is contrasting enough even when applying colorblind filters so a player can easily distinguish between the items on the screen.</li>
+                    <li><i>Touch</i>: For the touch constraint, our team was tasked with making sure our game can be completed using a single hand (but another hand may help). 
+                        To play our game, if a player were to play on their PC/Laptop, all they would need is access to a mouse/trackpad to help them navigate through the game by right clicking on specific events. 
+                        If played on a mobile device, all the player would really need to play is at least one finger to tap on the screen and trigger certain events.</li>
+                    <li><i>Hearing</i>: For the hearing constraint, our team was tasked with making sure our game can be completed with no auditory information (but sonic art is appreciated). 
+                        Our game is currently implemented without sound so a player with hearing impairments can have the same experience as someone without them.</li>
+                    <li><i>Rest</i>: For the rest constraint, our team was tasked with making sure active play can always reach a natural resting point within two minutes without the need to actively pause the game. 
+                        As we do not have any active timers implemented affecting gameplay, players can take a step away from the game whenever they want and not face any penalties.</li>
                 </ul>
-        <h3>Game Format</h3>
-            <p>We have a working live, server-side component that is playable on mobile browsers and can use unlimited network data transfer during play.</p>
+            <li><b>Localization</b>:</li>
+                <ul>
+                    <li>For the localization requirements, our team was tasked with providing language support for two different written languages, 
+                        with at least one language using either a logographic script or a right-to-left script.</li>
+                    <li>Currently Supported Languages:</li>
+                        <ul>
+                            <li>English (US)</li>
+                            <li>Mandarin</li>
+                            <li>Arabic</li>
+                        </ul>
+                </ul>
+            <li><b>Game Format</b>:</li>
+                <ul>
+                    <li>Our game is a working live, server-side component that is playable on mobile browsers and can use unlimited network data transfer during play.</li>
+                </ul>
+        </ul>
 
     <!--Playable Game Link-->
     <h2>Playable Game Link</h2>
@@ -131,7 +141,7 @@
         <li>Dave Markowitz: As the Tools and Deployment person, my contributions lied in reliable and fault free CI/CD. I assisted with gameplay and design when necessary as well are troubleshooting difficult issues.</li>
         <li>Monserrat Fausto: As the producer, my contributions to the project included developing and maintaining scheduled meetings, overseeing creative and technical development of the game, and ensuring timely delivery of deliverables.</li>
         <li>Nick Tung: I was responsible for art direction and created the map screen, battle screens, and parts of the post-win comic. Additionally, I was responsible for the mock-ups and some of the creative direction within the game. </li>
-        <li>Thanyared Wong:</li>
+        <li>Thanyared Wong: As design lead, I was responsible for implementing the initial map functionality and battle screen, as well as overseeing and maintaining the connections between different parts of the game, and delegating tasks to the tools or engine lead as needed.</li>
         <li>Eliana Cadelina (External): As the splash artist, my contributions included producing the Title and Loading Screens for the game.</li>
     </ul>
 
